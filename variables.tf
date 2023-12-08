@@ -21,6 +21,15 @@ variable "apigee_org_name" {
     type = string
     default = "apigee-hybrid-terraform"
 }
+variable "compute_region" {
+  type = string
+  default = "us-central1"
+}
+
+variable "compute_zone" {
+  type = string
+  default = "us-central1-a"
+}
 
 variable "apigee_analytics_region" {
     type = string

@@ -8,9 +8,9 @@ terraform {
 }
 
 provider "google" {
-  project = "apigee-hybrid-terraform"
-  region  = "us-central1"
-  zone = "us-central1-a"
+  project = var.project_id
+  region  = var.compute_region
+  zone = var.compute_zone
 }
 
 # enable the required GCP services
@@ -55,6 +55,6 @@ resource "google_compute_instance" "vm_instance" {
 # Create the Apigee Hybrid Organization
 resource "null_resource" "create_apigee_hybrid_org" {
   provisioner "local-exec" {
-      command = "${path.module}/create_apigee_org.py -o ${var.apigee_org_name} -a region"
+      command = "${path.module}/python_scripts/create_apigee_org.py -o ${var.apigee_org_name} -a ${var.apigee_analytics_region}"
   }
 }
