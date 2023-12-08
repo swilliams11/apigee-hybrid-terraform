@@ -21,6 +21,22 @@ variable "apigee_org_name" {
     type = string
     default = "apigee-hybrid-terraform"
 }
+
+variable "apigee_env_name" {
+    type = string
+    default = "hybrid_env"
+}
+
+variable "apigee_env_group_name" {
+    type = string
+    default = "hybrid_group"
+}
+
+variable "apigee_env_hostnames" {
+    type = string
+    default = "delta.com,example.com"
+}
+
 variable "compute_region" {
   type = string
   default = "us-central1"

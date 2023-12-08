@@ -58,3 +58,10 @@ resource "null_resource" "create_apigee_hybrid_org" {
       command = "${path.module}/python_scripts/create_apigee_org.py -o ${var.apigee_org_name} -a ${var.apigee_analytics_region}"
   }
 }
+
+# Create the Apigee Hybrid Environment and Environment Group
+resource "null_resource" "create_apigee_hybrid_env_env_group" {
+  provisioner "local-exec" {
+      command = "${path.module}/python_scripts/create_apigee_env.py -o ${var.apigee_org_name} -e ${var.apigee_env_name} -g ${var.apigee_env_group_name} -n ${var.apigee_env_hostnames}"
+  }
+}
