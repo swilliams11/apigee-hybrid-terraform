@@ -5,7 +5,7 @@ import helper
 import sys
 
 
-class TestCreateApigeeOrg(unittest.TestCase):
+class TestCreateApigeeEnv(unittest.TestCase):
     
     def test_main_missing_command_line_args(self):
         # Test that the function raises an error if the user does not enter the required command line arguments
@@ -14,13 +14,13 @@ class TestCreateApigeeOrg(unittest.TestCase):
     
 
     @mock.patch('requests.post')
-    @mock.patch('sys.argv', ['main', '-o', 'org_name', '-a', 'us-central1'])
-    def test_main_then_create_apigee_org_failed(self, mock_post):
+    @mock.patch('sys.argv', ['main', '-o', 'org-name', '-e', 'env-name', '-g', 'env-group-name', '-n', 'example.com'])
+    def test_main_then_create_apigee_env_failed(self, mock_post):
         # Given user enters the correct command line args
         # And the Create Apigee Org API request returns a 403, resulting in a SystemExit
         # Then the main function should throw a SystemExit
         
-        # mock the Create Apigee Org API Response as 403
+        # mock the Create Apigee Env API Response as 403
         mock_response = mock.Mock()
         mock_response.status_code = 403
         mock_response.json = lambda: {'data': 'Mocked response data'}
@@ -31,7 +31,7 @@ class TestCreateApigeeOrg(unittest.TestCase):
 
 
     @mock.patch('requests.post')
-    def test_create_apigee_org_failed(self, mock_post):
+    def test_create_apigee_env_failed(self, mock_post):
         # Tests that System Exit is called when Apigee returns a 403 response code
 
         # mock the Create Apigee Org API Response as 403
@@ -41,18 +41,20 @@ class TestCreateApigeeOrg(unittest.TestCase):
         mock_post.return_value = mock_response
 
         with self.assertRaises(SystemExit):
-            create_apigee_env.create_apigee_org_request("org", 'us-central1', 'HYBRID')
+            create_apigee_env.create_apigee_env_request("org", 'hybrid-env', 'hybrid-group', 'example.com')
             assert SystemExit.code == 3
+
 
 
 
     @mock.patch('requests.get')
     @mock.patch('requests.post')
     @mock.patch('helper.wait_for_complete')
-    def test_create_apigee_org_succeeded(self, mock_wait_for_complete, mock_post, mock_get):
+    def test_create_apigee_env_succeeded(self, mock_wait_for_complete, mock_post, mock_get):
+        # TODO - started on this on 12/8/2023 and I realized there is a Terrform Module that will do this. so test that instead for now.
         # Tests the create_apigee_org() function directly correctly waits for a success response.
 
-         # mock the Create Apigee Org API Response as 200 - state inprogress
+         # mock the Create Apigee Env Group API Response as 200 - state inprogress
         mock_get_response_inprogress = mock.Mock()
         mock_get_response_inprogress.status_code = 200
         mock_get_response_inprogress.json = lambda: {
@@ -94,6 +96,7 @@ class TestCreateApigeeOrg(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_wait_for_complete_succeeded(self, mock_get):
+        # TODO must update for Apigee environment instead
         # Tests the wait_for_compelete() function directly correctly waits for a success response.
 
         data = {

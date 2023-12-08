@@ -60,8 +60,9 @@ resource "null_resource" "create_apigee_hybrid_org" {
 }
 
 # Create the Apigee Hybrid Environment and Environment Group
-resource "null_resource" "create_apigee_hybrid_env_env_group" {
-  provisioner "local-exec" {
-      command = "${path.module}/python_scripts/create_apigee_env.py -o ${var.apigee_org_name} -e ${var.apigee_env_name} -g ${var.apigee_env_group_name} -n ${var.apigee_env_hostnames}"
-  }
-}
+# This may not be needed since we have a Terraform module to create envs and env groups.
+# resource "null_resource" "create_apigee_hybrid_env_env_group" {
+#   provisioner "local-exec" {
+#       command = "${path.module}/python_scripts/create_apigee_env.py -o ${var.apigee_org_name} -e ${var.apigee_env_name} -g ${var.apigee_env_group_name} -n ${var.apigee_env_hostnames}"
+#   }
+# }
