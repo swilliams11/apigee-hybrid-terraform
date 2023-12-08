@@ -9,6 +9,7 @@ This Terraform script will install Apigee Hybrid into your GKE cluster as non-pr
 1. Login to GCP and set your default project. 
 ```shell
 export PROJECT_ID=YOUR_PROJECT
+gcloud auth login
 gcloud auth application-default login
 gcloud config set project $PROJECT_ID
 ```
