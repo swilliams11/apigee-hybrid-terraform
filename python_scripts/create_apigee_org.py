@@ -5,16 +5,7 @@ import subprocess
 import requests
 import sys
 import time
-
-APIGEE_HOST = "https://apigee.googleapis.com"
-SLEEP_TIME = 10 #seconds
-MAX_SLEEP = SLEEP_TIME * 2
-HTTP_SUCCESS_STATUS_CODE = requests.codes.ok
-IN_PROGRESS = "IN_PROGRESS"
-
-def get_token():
-   token = subprocess.run(['gcloud', 'auth', 'print-access-token'], stdout=subprocess.PIPE)
-   return token.stdout
+from helper import APIGEE_HOST, HTTP_SUCCESS_STATUS_CODE, get_token, wait_for_complete
 
 
 def create_apigee_org_request(org_name, analytics_region, runtime_type):
@@ -36,21 +27,6 @@ def create_apigee_org_request(org_name, analytics_region, runtime_type):
       print("Bad response from Apigee API while creating a new Apigee Organization account.")
       print(f"HTTP: {response.status_code} - {response.text}")
       sys.exit(3)
-
-
-def wait_for_complete(post_response):
-  """
-  Wait for the Apigee Create Org to complete successfully before continuing.
-  """
-  sleep_time = SLEEP_TIME
-  operation_state = post_response["metadata"]["state"]
-  if operation_state == IN_PROGRESS:
-    operation_name = post_response["name"]
-    while operation_state == IN_PROGRESS and sleep_time < MAX_SLEEP:
-      time.sleep(SLEEP_TIME)
-      sleep_time += SLEEP_TIME
-      get_response = requests.get(f"{APIGEE_HOST}/v1/{operation_name}")
-      operation_state = get_response.json()["metadata"]["state"]
 
 
 def main():

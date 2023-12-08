@@ -1,6 +1,7 @@
 from unittest import mock
 import unittest
 import create_apigee_org
+import helper
 import sys
 
 
@@ -45,10 +46,25 @@ class TestCreateApigeeOrg(unittest.TestCase):
 
 
 
+    @mock.patch('requests.get')
     @mock.patch('requests.post')
-    @mock.patch('create_apigee_org.wait_for_complete')
-    def test_create_apigee_org_succeeded(self, mock_post, mock_wait_for_complete):
+    @mock.patch('helper.wait_for_complete')
+    def test_create_apigee_org_succeeded(self, mock_wait_for_complete, mock_post, mock_get):
         # Tests the create_apigee_org() function directly correctly waits for a success response.
+
+         # mock the Create Apigee Org API Response as 200 - state inprogress
+        mock_get_response_inprogress = mock.Mock()
+        mock_get_response_inprogress.status_code = 200
+        mock_get_response_inprogress.json = lambda: {
+        "name": "organizations/org_name/operations/LONG_RUNNING_OPERATION_ID",
+        "metadata": {
+            "@type": "type.googleapis.com/google.cloud.apigee.v1.OperationMetadata",
+            "operationType": "INSERT",
+            "targetResourceName": "organizations/org_name",
+            "state": "FINISHED"
+        }
+        }
+        mock_get.return_value = mock_get_response_inprogress
 
         # mock the Create Apigee Org API Response as 200 - state inprogress
         mock_response_inprogress = mock.Mock()
@@ -63,13 +79,17 @@ class TestCreateApigeeOrg(unittest.TestCase):
         }
         }
         mock_post.return_value = mock_response_inprogress
-        mock_wait_for_complete.return_value = ""
+        
+        mock_wait_for_complete_response = mock.Mock(return_value="")
+        mock_wait_for_complete.return_value = mock_wait_for_complete_response
+        
 
         create_apigee_org.create_apigee_org_request("org", 'us-central1', 'HYBRID')
          # Verify the first response
         self.assertEqual(mock_response_inprogress.status_code, 200)
         self.assertEqual(mock_response_inprogress.json()['metadata']['state'], 'IN_PROGRESS')
         self.assertEqual(mock_post.call_count, 1)
+        
 
 
     @mock.patch('requests.get')
