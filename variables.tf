@@ -32,9 +32,14 @@ variable "apigee_env_group_name" {
     default = "hybrid_group"
 }
 
-variable "apigee_env_hostnames" {
+variable "apigee_env_hostname" {
     type = string
-    default = "delta.com,example.com"
+    default = "delta.com"
+}
+
+variable "apigee_env_hostnames" {
+    type = list
+    default = ["example.com","myhost.com"]
 }
 
 variable "compute_region" {
@@ -55,4 +60,14 @@ variable "apigee_analytics_region" {
 variable "apigee_runtime_type" {
     type = string
     default = "HYBRID"
+}
+
+variable "apigee_wait_for_complete" {
+  type = number
+  default = 60 #seconds
+}
+
+variable "apigee_wait_for_complete_increments" {
+  type = number
+  default = 15 #times so 60 seconds * 10 is 10 minutes
 }
