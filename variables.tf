@@ -22,14 +22,19 @@ variable "apigee_org_name" {
     default = "apigee-hybrid-terraform"
 }
 
+variable "apigee_org_name_full_path" {
+    type = string
+    default = "organizations/apigee-hybrid-terraform"
+}
+
 variable "apigee_env_name" {
     type = string
-    default = "hybrid_env"
+    default = "hybrid-env"
 }
 
 variable "apigee_env_group_name" {
     type = string
-    default = "hybrid_group"
+    default = "hybrid-group"
 }
 
 variable "apigee_env_hostname" {

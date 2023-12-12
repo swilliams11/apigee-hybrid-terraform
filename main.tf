@@ -64,7 +64,6 @@ resource "null_resource" "create_apigee_hybrid_org" {
   }
 
   provisioner "local-exec" {
-    when = create
     command = "python3 ${path.module}/python_scripts/create_apigee_org.py -o ${var.apigee_org_name} --analytics_region ${var.apigee_analytics_region} -t ${var.apigee_wait_for_complete} -i ${var.apigee_wait_for_complete_increments}" 
   }
 
@@ -88,7 +87,7 @@ resource "google_apigee_environment" "create_apigee_env" {
   name         = var.apigee_env_name
   description  = "Apigee Environment"
   display_name = var.apigee_env_name
-  org_id       = var.apigee_org_name
+  org_id       = var.apigee_org_name_full_path
 
    depends_on = [
     null_resource.create_apigee_hybrid_org
@@ -98,7 +97,7 @@ resource "google_apigee_environment" "create_apigee_env" {
 resource "google_apigee_envgroup" "create_apigee_env_grp" {
   name      = "my-envgroup"
   hostnames = [var.apigee_env_hostname]
-  org_id    = var.apigee_org_name
+  org_id    = var.apigee_org_name_full_path
   depends_on = [
     null_resource.create_apigee_hybrid_org
   ]
@@ -108,8 +107,8 @@ resource "google_apigee_envgroup_attachment" "apigee_env_attachment" {
   envgroup_id  = google_apigee_envgroup.create_apigee_env_grp.id
   environment  = google_apigee_environment.create_apigee_env.name
 
-  depends_on = [
-    google_apigee_environment.create_apigee_env,
-    google_apigee_envgroup.create_apigee_env_grp
-  ]
+  # depends_on = [
+  #   google_apigee_environment.create_apigee_env,
+  #   google_apigee_envgroup.create_apigee_env_grp
+  # ]
 }

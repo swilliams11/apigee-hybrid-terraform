@@ -23,7 +23,7 @@ def get_token():
    return token.stdout
 
 
-def wait_for_complete(post_response):
+def wait_for_complete(post_response, auth_token):
   """
   Wait for the Apigee Create Org to complete successfully before continuing.
   """
@@ -31,16 +31,24 @@ def wait_for_complete(post_response):
   operation_state = post_response["metadata"]["state"]
   if operation_state == IN_PROGRESS:
     operation_name = post_response["name"]
-    log.info(f"Apigee operation is {operation_state} ... {operation_name}")
+    print(f"Apigee operation is {operation_state} ... {operation_name}")
     while operation_state == IN_PROGRESS and sleep_time < MAX_SLEEP:
-      log.info(f"Waiting for operation to complete...")
+      print(f"Waiting for operation to complete...")
       time.sleep(SLEEP_TIME)
       sleep_time += SLEEP_TIME
-      get_response = requests.get(f"{APIGEE_HOST}/v1/{operation_name}")
-      if get_response.status_code != 200:
+      headers = {'Authorization': f'Bearer {auth_token}'}
+      get_response = requests.get(f"{APIGEE_HOST}/v1/{operation_name}", headers=headers)
+
+      if get_response.status_code == 200:
         operation_state = get_response.json()["metadata"]["state"]
-        log.info(f"Operation state is {operation_state}")
+        print(f"{operation_name} - Operation state is {operation_state}")
+        continue
+      elif get_response.status_code == 401: 
+        auth_token = get_token()
+        operation_state = IN_PROGRESS
+        print(f"GET {APIGEE_HOST}/v1/{operation_name} is {get_response.status_code} ... refreshing token")
+        continue
       else:
-        log.error(f"Cannot get operation state for {operation_name}")
+        print(f"Cannot get operation state for {operation_name}")
+        print(get_response.json())
         sys.exit(3)
-      break

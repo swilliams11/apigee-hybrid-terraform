@@ -22,13 +22,13 @@ def create_apigee_org_request(org_name, analytics_region, runtime_type):
     log.info("Sent the request to create the Apigee Org.")
 
     if response.status_code == HTTP_SUCCESS_STATUS_CODE:
-      wait_for_complete(response.json())
+      wait_for_complete(response.json(), token)
     elif response.status_code == 409:
-       log.info("Apigee organization already exists, so exiting.")
+       print("Apigee organization already exists, so exiting.")
        sys.exit(0)
     else:
-      log.error("Bad response from Apigee API while creating a new Apigee Organization account.")
-      log.error(f"HTTP: {response.status_code} - {response.text}")
+      print("Bad response from Apigee API while creating a new Apigee Organization account.")
+      print(f"HTTP: {response.status_code} - {response.text}")
       sys.exit(3)
 
 
