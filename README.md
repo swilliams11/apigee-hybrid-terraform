@@ -1,9 +1,15 @@
 # apigee-hybrid-terraform
 Apigee Hybrid Terraform Installation
 
-This Terraform script will install Apigee Hybrid into your GKE cluster as non-production.
+This Terraform script will perform the following:
+* install a non-production setup of Apigee Hybrid 
+* into your GKE cluster (in Google Cloud)
 
 ## GKE Non-prod Installation
+
+### Prerequisites
+1. Install gcloud
+2. Install [Helm](https://helm.sh/docs/) version 3.10 or higher. 
 
 ### Setup
 1. Login to GCP and set your default project. 

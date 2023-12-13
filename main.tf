@@ -2,10 +2,23 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "4.51.0"
+      version = "5.9.0"
     }
   }
 }
+
+# # google_client_config and kubernetes provider must be explicitly specified like the following.
+# data "google_client_config" "default" {
+#   access_token = ""
+# }
+
+provider "kubernetes" {
+  #host                   = "https://${module.gke.endpoint}"
+  # token                  = data.google_client_config.default.access_token
+  #cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+}
+
+
 
 provider "google" {
   project = var.project_id
@@ -22,11 +35,40 @@ resource "google_project_service" "gcp_services" {
 }
 
 resource "google_compute_network" "vpc_network" {
-  name = "terraform-network"
+  name = "apigee-vpc"
+  auto_create_subnetworks = false
+
   depends_on = [
     google_project_service.gcp_services
   ]
 }
+
+resource "google_compute_subnetwork" "us_central1" {
+  name          = "us-central1"
+  ip_cidr_range = "10.20.0.0/20"
+  region        = "us-central1"
+  network       = google_compute_network.vpc_network.id
+  secondary_ip_range {
+    range_name    = var.vpc_subnet_secondary_range_pods
+    ip_cidr_range = "10.188.0.0/20"
+  }
+  secondary_ip_range {
+    range_name    = var.vpc_subnet_secondary_range_services
+    ip_cidr_range = "10.192.0.0/20"
+  }
+}
+
+# resource "google_compute_subnetwork" "us_west1" {
+#   name          = "us-west1"
+#   ip_cidr_range = "10.5.0.0/20"
+#   region        = "us-west1"
+#   network       = google_compute_network.vpc_network.id
+#   secondary_ip_range {
+#     range_name    = "tf-test-secondary-range-update1"
+#     ip_cidr_range = "10.192.0.0/20"
+#   }
+# }
+
 
 # resource "google_compute_instance" "vm_instance" {
 #   name         = "terraform-instance"
@@ -112,3 +154,22 @@ resource "google_apigee_envgroup_attachment" "apigee_env_attachment" {
   #   google_apigee_envgroup.create_apigee_env_grp
   # ]
 }
+
+
+module "gke" {
+  source     = "./gke"
+  project_id = var.project_id
+  region   = var.compute_region
+
+  ip_range_pods = var.vpc_subnet_secondary_range_pods
+  ip_range_services = var.vpc_subnet_secondary_range_services
+  name = "cluster-1"
+  network = google_compute_network.vpc_network.name
+  subnetwork = google_compute_subnetwork.us_central1.name
+
+  depends_on = [ 
+    google_project_service.gcp_services,
+    google_compute_network.vpc_network ]
+}
+
+

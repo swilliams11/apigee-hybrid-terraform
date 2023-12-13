@@ -8,7 +8,7 @@ variable "gcp_service_list_gke" {
     "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com",
     "container.googleapis.com",
-    "pubsub.googleapis.com" 
+    "pubsub.googleapis.com"
   ]
 }
 
@@ -76,3 +76,14 @@ variable "apigee_wait_for_complete_increments" {
   type = number
   default = 15 #times so 60 seconds * 10 is 10 minutes
 }
+
+variable "vpc_subnet_secondary_range_pods" {
+  type = string
+  default = "gke-secondary-pods"
+}
+
+variable "vpc_subnet_secondary_range_services" {
+  type = string
+  default = "gke-secondary-services"
+}
+
