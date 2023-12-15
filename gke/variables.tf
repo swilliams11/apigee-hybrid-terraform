@@ -32,7 +32,14 @@ variable "subnetwork" {
     description = "Subnetwork within the VPC network where the GKE cluster will be created."
 }
 
-variable "gke_creds"{
-    type = string
-    description = "GKE cluster credentials"
+# variable "gke_creds"{
+#     type = string
+#     description = "GKE cluster credentials"
+# }
+
+variable "ssh_user" {
+  type = string
+  description = "The user name used to ssh into the bastion VM instance"
+  sensitive = true
+  nullable = false
 }

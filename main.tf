@@ -141,10 +141,12 @@ module "gke" {
   name = "cluster-1" # cluster name
   network = google_compute_network.vpc_network.name
   subnetwork = google_compute_subnetwork.us_central1.name
+  ssh_user = var.ssh_user
 
   depends_on = [ 
     google_project_service.gcp_services,
-    google_compute_network.vpc_network ]
+    google_compute_network.vpc_network,
+    module.firewall_rules ]
 }
 
 

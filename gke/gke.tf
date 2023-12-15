@@ -14,8 +14,9 @@
 
 # Create a VM that can be used to access the K8S cluster.
 resource "google_compute_instance" "vm_instance" {
-  name         = "apgiee-k8s-cluster-bastion"
+  name         = "apigee-k8s-cluster-bastion"
   machine_type = "f1-micro"
+  tags = ["ssh"]
 
   boot_disk {
     initialize_params {
@@ -25,26 +26,48 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     network = var.network
-   
+    subnetwork = var.subnetwork
   }
 
   shielded_instance_config {
     enable_secure_boot =  true
-
   }
 
-  depends_on = [
-    google_project_service.gcp_services
+  #metadata_startup_script = "gcloud components install kubectl"
+   metadata_startup_script = "${file("${path.module}/update_storage_class.sh")}"
+
+  # provisioner "remote-exec" {
+  #    connection {
+  #     #host        = google_compute_address.static.address
+  #     # host = self.network_interface[0].network_ip
+  #     host = self.name
+  #     type        = "ssh"
+  #     user        = var.ssh_user
+  #     timeout     = "120s"
+  #     #private_key = file(var.privatekeypath)
+  #   }
+  #   inline = [
+  #     "gcloud container clusters get-credentials cluster-1",
+  #     "kubectl apply -f ./storageclass.yaml",
+  #     "kubectl patch storageclass standard-rwo -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"false\"}}}'",
+  #     "kubectl patch storageclass apigee-sc -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'",
+  #     "kubectl get sc",
+  #     "gcloud container clusters update ${var.name} --workload-pool=${var.project_id}.svc.id.goog --project ${var.project_id} --region ${var.region}",
+  #     "gcloud container clusters describe ${var.name} --project ${var.project_id} --region ${var.region} | grep -i \"workload\""
+  #   ]
+  # }
+  depends_on = [ 
+    module.create_gke_cluster
   ]
 }
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/private-cluster
-module "gke" {
+module "create_gke_cluster" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   project_id                 = var.project_id
   name                       = var.name
   region                     = var.region
-  zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
+  zones                       = ["us-central1-a", "us-central1-b", "us-central1-f"]
   network                    = var.network
   subnetwork                 = var.subnetwork
   ip_range_pods              = var.ip_range_pods
@@ -194,13 +217,12 @@ module "gke" {
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/using_gke_with_terraform
 # Get the k8s credentials so that we can configure it.check
 # gcloud container clusters get-credentials cluster-name
-resource "null_resource" "get_k8s_credentials" {
+# resource "null_resource" "apply_storage_class_to_ks_cluster" {
 
-  provisioner "local-exec" {
-    command = "python3 ${path.module}/gke/update_storage_class.sh" 
-  }
+#   provisioner "local-exec" {
+#     command = "${path.module}/update_storage_class.sh" 
+#   }
    
-  depends_on = [module.gke]
-}
-
+#   depends_on = [google_compute_instance.vm_instance]
+# }
 

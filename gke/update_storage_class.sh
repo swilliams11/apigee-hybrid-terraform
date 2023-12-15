@@ -8,7 +8,16 @@ CLUSTER_LOCATION=us-central1
 # Update the storage class.
 # https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster
 echo "Fetching the cluster's credentials"
-gcloud container clusters get-credentials cluster-1
+
+gcloud compute ssh "apigee-k8s-cluster-bastion" --zone=us-central1-a
+
+echo "installing kubectl..."
+sudo apt-get install kubectl -y
+sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y
+#gcloud components install kubectl --quiet
+
+gcloud container clusters get-credentials cluster-1 --region us-central1 --project apigee-hybrid-terraform
+#gcloud container clusters get-credentials cluster-1 --region
 
 echo "Applying the storage class update..."
 kubectl apply -f ./storageclass.yaml

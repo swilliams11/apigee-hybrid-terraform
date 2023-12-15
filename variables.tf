@@ -87,3 +87,15 @@ variable "vpc_subnet_secondary_range_services" {
   default = "gke-secondary-services"
 }
 
+variable "allow_listed_ip" {
+  type = string
+  description = "IP address allow-listed for the firewall."
+  default = "35.235.240.0/20"
+}
+
+variable "ssh_user" {
+  type = string
+  description = "The user name used to ssh into the bastion VM instance"
+  sensitive = true
+  nullable = false
+}

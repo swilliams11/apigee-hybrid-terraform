@@ -30,4 +30,7 @@ terraform apply
 
 
 
-
+### Apply and override variables
+```shell
+terraform apply -var="ssh_user=user_id"
+```
