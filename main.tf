@@ -70,31 +70,6 @@ resource "google_compute_subnetwork" "us_central1" {
 # }
 
 
-# resource "google_compute_instance" "vm_instance" {
-#   name         = "terraform-instance"
-#   machine_type = "f1-micro"
-
-#   boot_disk {
-#     initialize_params {
-#       image = "debian-cloud/debian-11"
-#     }
-#   }
-
-#   network_interface {
-#     network = google_compute_network.vpc_network.name
-   
-#   }
-
-#   shielded_instance_config {
-#     enable_secure_boot =  true
-
-#   }
-
-#   depends_on = [
-#     google_project_service.gcp_services
-#   ]
-# }
-
 # Create the Apigee Hybrid Organization
 resource "null_resource" "create_apigee_hybrid_org" {
 
@@ -163,7 +138,7 @@ module "gke" {
 
   ip_range_pods = var.vpc_subnet_secondary_range_pods
   ip_range_services = var.vpc_subnet_secondary_range_services
-  name = "cluster-1"
+  name = "cluster-1" # cluster name
   network = google_compute_network.vpc_network.name
   subnetwork = google_compute_subnetwork.us_central1.name
 
