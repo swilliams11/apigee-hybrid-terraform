@@ -43,3 +43,9 @@ variable "ssh_user" {
   sensitive = true
   nullable = false
 }
+
+variable "node_locations" {
+    type = string
+    default = "us-central1-a"
+    #default = "us-central1-a,us-central1-b,us-central1-c"
+}

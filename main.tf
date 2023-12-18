@@ -146,7 +146,9 @@ module "gke" {
   depends_on = [ 
     google_project_service.gcp_services,
     google_compute_network.vpc_network,
-    module.firewall_rules ]
+    google_compute_firewall.firewall_rule
+    #module.firewall_rules 
+    ]
 }
 
 

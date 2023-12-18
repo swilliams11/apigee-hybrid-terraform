@@ -1,0 +1,2525 @@
+{
+  "version": 4,
+  "terraform_version": "1.6.5",
+  "serial": 149,
+  "lineage": "89c69bd2-be76-a33e-d04c-1ff202691a99",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "vpc_network",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": false,
+            "delete_default_routes_on_create": false,
+            "description": "",
+            "enable_ula_internal_ipv6": false,
+            "gateway_ipv4": "",
+            "id": "projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+            "internal_ipv6_range": "",
+            "mtu": 0,
+            "name": "apigee-vpc",
+            "network_firewall_policy_enforcement_order": "AFTER_CLASSIC_FIREWALL",
+            "project": "apigee-hybrid-terraform",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_project_service.gcp_services"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_subnetwork",
+      "name": "us_central1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "creation_timestamp": "2023-12-15T14:23:28.709-08:00",
+            "description": "",
+            "external_ipv6_prefix": "",
+            "fingerprint": null,
+            "gateway_address": "10.20.0.1",
+            "id": "projects/apigee-hybrid-terraform/regions/us-central1/subnetworks/us-central1",
+            "internal_ipv6_prefix": "",
+            "ip_cidr_range": "10.20.0.0/20",
+            "ipv6_access_type": "",
+            "ipv6_cidr_range": "",
+            "log_config": [],
+            "name": "us-central1",
+            "network": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+            "private_ip_google_access": true,
+            "private_ipv6_google_access": "DISABLE_GOOGLE_ACCESS",
+            "project": "apigee-hybrid-terraform",
+            "purpose": "PRIVATE",
+            "region": "us-central1",
+            "role": "",
+            "secondary_ip_range": [
+              {
+                "ip_cidr_range": "10.188.0.0/20",
+                "range_name": "gke-secondary-pods"
+              },
+              {
+                "ip_cidr_range": "10.192.0.0/20",
+                "range_name": "gke-secondary-services"
+              }
+            ],
+            "self_link": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/regions/us-central1/subnetworks/us-central1",
+            "stack_type": "IPV4_ONLY",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_project_service.gcp_services"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_service",
+      "name": "gcp_services",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "index_key": "apigee.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/apigee.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "apigee.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "apigeeconnect.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/apigeeconnect.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "apigeeconnect.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "cloudresourcemanager.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/cloudresourcemanager.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "cloudresourcemanager.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "compute.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/compute.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "compute.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "container.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/container.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "container.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "pubsub.googleapis.com",
+          "schema_version": 0,
+          "attributes": {
+            "disable_dependent_services": true,
+            "disable_on_destroy": true,
+            "id": "apigee-hybrid-terraform/pubsub.googleapis.com",
+            "project": "apigee-hybrid-terraform",
+            "service": "pubsub.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInJlYWQiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "module": "module.firewall_rules",
+      "mode": "managed",
+      "type": "google_compute_firewall",
+      "name": "rules",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "index_key": "allow-ssh",
+          "schema_version": 1,
+          "attributes": {
+            "allow": [
+              {
+                "ports": [
+                  "22"
+                ],
+                "protocol": "tcp"
+              }
+            ],
+            "creation_timestamp": "2023-12-18T07:23:29.132-08:00",
+            "deny": [],
+            "description": "allow ssh",
+            "destination_ranges": [],
+            "direction": "INGRESS",
+            "disabled": false,
+            "enable_logging": null,
+            "id": "projects/apigee-hybrid-terraform/global/firewalls/allow-ssh",
+            "log_config": [
+              {
+                "metadata": "INCLUDE_ALL_METADATA"
+              }
+            ],
+            "name": "allow-ssh",
+            "network": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+            "priority": 800,
+            "project": "apigee-hybrid-terraform",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/global/firewalls/allow-ssh",
+            "source_ranges": [
+              "0.0.0.0/0"
+            ],
+            "source_service_accounts": null,
+            "source_tags": null,
+            "target_service_accounts": null,
+            "target_tags": [
+              "ssh"
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_project_service.gcp_services"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke",
+      "mode": "managed",
+      "type": "google_compute_instance",
+      "name": "vm_instance",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 6,
+          "attributes": {
+            "advanced_machine_features": [],
+            "allow_stopping_for_update": null,
+            "attached_disk": [],
+            "boot_disk": [
+              {
+                "auto_delete": true,
+                "device_name": "persistent-disk-0",
+                "disk_encryption_key_raw": "",
+                "disk_encryption_key_sha256": "",
+                "initialize_params": [
+                  {
+                    "image": "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-11-bullseye-v20231212",
+                    "labels": {},
+                    "resource_manager_tags": null,
+                    "size": 10,
+                    "type": "pd-standard"
+                  }
+                ],
+                "kms_key_self_link": "",
+                "mode": "READ_WRITE",
+                "source": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/disks/apigee-k8s-cluster-bastion"
+              }
+            ],
+            "can_ip_forward": false,
+            "confidential_instance_config": [],
+            "cpu_platform": "Intel Haswell",
+            "current_status": "RUNNING",
+            "deletion_protection": false,
+            "description": "",
+            "desired_status": null,
+            "effective_labels": {},
+            "enable_display": false,
+            "guest_accelerator": [],
+            "hostname": "",
+            "id": "projects/apigee-hybrid-terraform/zones/us-central1-a/instances/apigee-k8s-cluster-bastion",
+            "instance_id": "2327777844126407543",
+            "label_fingerprint": "42WmSpB8rSM=",
+            "labels": null,
+            "machine_type": "f1-micro",
+            "metadata": null,
+            "metadata_fingerprint": "HGsOdMA7DYk=",
+            "metadata_startup_script": "# /bin/sh\n# This shell script is for regional gke clusters. \n\nCLUSTER_NAME=cluster-1\nPROJECT_ID=apigee-terraform-hybrid\nCLUSTER_LOCATION=us-central1\n\n# Update the storage class.\n# https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster\necho \"Fetching the cluster's credentials\"\n\ngcloud compute ssh \"apigee-k8s-cluster-bastion\" --zone=us-central1-a\n\necho \"installing kubectl...\"\nsudo apt-get install kubectl -y\nsudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y\n#gcloud components install kubectl --quiet\n\ngcloud container clusters get-credentials cluster-1 --region us-central1 --project apigee-hybrid-terraform\n#gcloud container clusters get-credentials cluster-1 --region\n\necho \"Applying the storage class update...\"\nkubectl apply -f ./storageclass.yaml\n\necho \"Patching the storage class...\"\nkubectl patch storageclass standard-rwo \\\n-p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"false\"}}}'\n\nkubectl patch storageclass apigee-sc \\\n-p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'\n\necho \"Verify the results of the patch...\"\n# print the storage class\nkubectl get sc\n\necho \"Enabling the workload identity...\"\n# Enabled the workload identity\ngcloud container clusters update ${CLUSTER_NAME} \\\n  --workload-pool=${PROJECT_ID}.svc.id.goog \\\n  --project ${PROJECT_ID} \\\n  --region ${CLUSTER_LOCATION}\n\necho \"Verify the results of the workload identity...\"\n# Verify the identity is good to go\ngcloud container clusters describe ${CLUSTER_NAME} \\\n--project ${PROJECT_ID} \\\n--region ${CLUSTER_LOCATION} | grep -i \"workload\"",
+            "min_cpu_platform": "",
+            "name": "apigee-k8s-cluster-bastion",
+            "network_interface": [
+              {
+                "access_config": [],
+                "alias_ip_range": [],
+                "internal_ipv6_prefix_length": 0,
+                "ipv6_access_config": [],
+                "ipv6_access_type": "",
+                "ipv6_address": "",
+                "name": "nic0",
+                "network": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+                "network_ip": "10.20.0.4",
+                "nic_type": "",
+                "queue_count": 0,
+                "stack_type": "IPV4_ONLY",
+                "subnetwork": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/regions/us-central1/subnetworks/us-central1",
+                "subnetwork_project": "apigee-hybrid-terraform"
+              }
+            ],
+            "network_performance_config": [],
+            "params": [],
+            "project": "apigee-hybrid-terraform",
+            "reservation_affinity": [],
+            "resource_policies": null,
+            "scheduling": [
+              {
+                "automatic_restart": true,
+                "instance_termination_action": "",
+                "local_ssd_recovery_timeout": [],
+                "min_node_cpus": 0,
+                "node_affinities": [],
+                "on_host_maintenance": "MIGRATE",
+                "preemptible": false,
+                "provisioning_model": "STANDARD"
+              }
+            ],
+            "scratch_disk": [],
+            "self_link": "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instances/apigee-k8s-cluster-bastion",
+            "service_account": [],
+            "shielded_instance_config": [
+              {
+                "enable_integrity_monitoring": true,
+                "enable_secure_boot": true,
+                "enable_vtpm": true
+              }
+            ],
+            "tags": [
+              "ssh"
+            ],
+            "tags_fingerprint": "pfSjJj1RiUg=",
+            "terraform_labels": {},
+            "timeouts": null,
+            "zone": "us-central1-a"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiNiJ9",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_compute_subnetwork.us_central1",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.data.google_compute_subnetwork.gke_subnetwork",
+            "module.gke.module.create_gke_cluster.data.google_compute_zones.available",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.region",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.zone",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.intra_egress",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.master_webhooks",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.shadow_allow_inkubelet",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.shadow_allow_master",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.shadow_allow_nodes",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.shadow_allow_pods",
+            "module.gke.module.create_gke_cluster.google_compute_firewall.shadow_deny_exkubelet",
+            "module.gke.module.create_gke_cluster.google_container_cluster.primary",
+            "module.gke.module.create_gke_cluster.google_container_node_pool.pools",
+            "module.gke.module.create_gke_cluster.google_container_node_pool.windows_pools",
+            "module.gke.module.create_gke_cluster.google_project_iam_member.cluster_service_account-artifact-registry",
+            "module.gke.module.create_gke_cluster.google_project_iam_member.cluster_service_account-gcr",
+            "module.gke.module.create_gke_cluster.google_project_iam_member.cluster_service_account-nodeService_account",
+            "module.gke.module.create_gke_cluster.google_service_account.cluster_service_account",
+            "module.gke.module.create_gke_cluster.kubernetes_config_map.ip-masq-agent",
+            "module.gke.module.create_gke_cluster.kubernetes_config_map_v1_data.kube-dns",
+            "module.gke.module.create_gke_cluster.kubernetes_config_map_v1_data.kube-dns-upstream-nameservers-and-stub-domains",
+            "module.gke.module.create_gke_cluster.kubernetes_config_map_v1_data.kube-dns-upstream-namservers",
+            "module.gke.module.create_gke_cluster.random_shuffle.available_zones",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "data",
+      "type": "google_container_engine_versions",
+      "name": "region",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "default_cluster_version": "1.27.3-gke.100",
+            "id": "2023-12-18 15:23:39.940750598 +0000 UTC",
+            "latest_master_version": "1.28.4-gke.1083000",
+            "latest_node_version": "1.28.4-gke.1083000",
+            "location": "us-central1",
+            "project": "apigee-hybrid-terraform",
+            "release_channel_default_version": {
+              "RAPID": "1.28.3-gke.1203001",
+              "REGULAR": "1.27.3-gke.100",
+              "STABLE": "1.27.3-gke.100"
+            },
+            "release_channel_latest_version": {
+              "RAPID": "1.28.4-gke.1083000",
+              "REGULAR": "1.28.3-gke.1203001",
+              "STABLE": "1.27.5-gke.200"
+            },
+            "valid_master_versions": [
+              "1.28.4-gke.1083000",
+              "1.28.3-gke.1286000",
+              "1.28.3-gke.1203001",
+              "1.28.3-gke.1118000",
+              "1.27.8-gke.1067000",
+              "1.27.7-gke.1293000",
+              "1.27.7-gke.1121000",
+              "1.27.7-gke.1056000",
+              "1.27.5-gke.200",
+              "1.27.4-gke.900",
+              "1.27.3-gke.100",
+              "1.27.2-gke.1200",
+              "1.26.11-gke.1055000",
+              "1.26.10-gke.1235000",
+              "1.26.10-gke.1101000",
+              "1.26.10-gke.1073000",
+              "1.26.8-gke.200",
+              "1.26.7-gke.500",
+              "1.26.6-gke.1700",
+              "1.26.5-gke.2100",
+              "1.25.16-gke.1041000",
+              "1.25.16-gke.1020000",
+              "1.25.15-gke.1115000",
+              "1.25.13-gke.200",
+              "1.25.12-gke.500",
+              "1.25.10-gke.2700",
+              "1.24.17-gke.2364000",
+              "1.24.17-gke.2347000",
+              "1.24.17-gke.2266000",
+              "1.24.17-gke.2230000",
+              "1.24.17-gke.200",
+              "1.24.16-gke.500"
+            ],
+            "valid_node_versions": [
+              "1.28.4-gke.1083000",
+              "1.28.3-gke.1286000",
+              "1.28.3-gke.1203001",
+              "1.28.3-gke.1203000",
+              "1.28.3-gke.1118000",
+              "1.28.3-gke.1098000",
+              "1.28.3-gke.1090000",
+              "1.28.2-gke.1157000",
+              "1.27.8-gke.1067000",
+              "1.27.7-gke.1293000",
+              "1.27.7-gke.1121000",
+              "1.27.7-gke.1088000",
+              "1.27.7-gke.1056000",
+              "1.27.7-gke.1038000",
+              "1.27.6-gke.1506000",
+              "1.27.6-gke.1445000",
+              "1.27.6-gke.1248000",
+              "1.27.5-gke.200",
+              "1.27.4-gke.900",
+              "1.27.3-gke.1700",
+              "1.27.3-gke.100",
+              "1.27.2-gke.2100",
+              "1.27.2-gke.1200",
+              "1.26.11-gke.1055000",
+              "1.26.10-gke.1235000",
+              "1.26.10-gke.1101000",
+              "1.26.10-gke.1073000",
+              "1.26.10-gke.1038000",
+              "1.26.10-gke.1024000",
+              "1.26.9-gke.1507000",
+              "1.26.9-gke.1437000",
+              "1.26.8-gke.200",
+              "1.26.7-gke.500",
+              "1.26.6-gke.1700",
+              "1.26.5-gke.2700",
+              "1.26.5-gke.2100",
+              "1.26.5-gke.1400",
+              "1.26.5-gke.1200",
+              "1.26.4-gke.1400",
+              "1.26.4-gke.500",
+              "1.26.3-gke.1000",
+              "1.26.3-gke.400",
+              "1.26.2-gke.1000",
+              "1.26.1-gke.1500",
+              "1.25.16-gke.1041000",
+              "1.25.16-gke.1020000",
+              "1.25.15-gke.1115000",
+              "1.25.15-gke.1083000",
+              "1.25.15-gke.1049000",
+              "1.25.15-gke.1033000",
+              "1.25.14-gke.1474000",
+              "1.25.14-gke.1421000",
+              "1.25.13-gke.200",
+              "1.25.12-gke.500",
+              "1.25.11-gke.1700",
+              "1.25.10-gke.2700",
+              "1.25.10-gke.2100",
+              "1.25.10-gke.1400",
+              "1.25.10-gke.1200",
+              "1.25.9-gke.2300",
+              "1.25.9-gke.400",
+              "1.25.8-gke.1000",
+              "1.25.8-gke.500",
+              "1.25.7-gke.1000",
+              "1.25.6-gke.1000",
+              "1.25.6-gke.200",
+              "1.25.5-gke.2000",
+              "1.25.5-gke.1500",
+              "1.25.4-gke.2100",
+              "1.25.3-gke.800",
+              "1.24.17-gke.2364000",
+              "1.24.17-gke.2347000",
+              "1.24.17-gke.2266000",
+              "1.24.17-gke.2230000",
+              "1.24.17-gke.2211000",
+              "1.24.17-gke.2198000",
+              "1.24.17-gke.2155000",
+              "1.24.17-gke.2113000",
+              "1.24.17-gke.200",
+              "1.24.16-gke.500",
+              "1.24.15-gke.1700",
+              "1.24.14-gke.2700",
+              "1.24.14-gke.2100",
+              "1.24.14-gke.1400",
+              "1.24.14-gke.1200",
+              "1.24.13-gke.2500",
+              "1.24.13-gke.500",
+              "1.24.12-gke.1000",
+              "1.24.12-gke.500",
+              "1.24.11-gke.1000",
+              "1.24.10-gke.2300",
+              "1.24.10-gke.1200",
+              "1.24.9-gke.3200",
+              "1.24.9-gke.2000",
+              "1.24.9-gke.1500",
+              "1.24.8-gke.2000",
+              "1.24.8-gke.401",
+              "1.24.7-gke.900",
+              "1.24.6-gke.1500",
+              "1.24.5-gke.600",
+              "1.24.4-gke.800",
+              "1.24.3-gke.2100",
+              "1.24.3-gke.900",
+              "1.24.3-gke.200",
+              "1.24.2-gke.1900",
+              "1.24.2-gke.300",
+              "1.24.1-gke.1800",
+              "1.24.1-gke.1400",
+              "1.23.17-gke.10700",
+              "1.23.17-gke.10000",
+              "1.23.17-gke.8400",
+              "1.23.17-gke.7700",
+              "1.23.17-gke.7000",
+              "1.23.17-gke.6800",
+              "1.23.17-gke.5600",
+              "1.23.17-gke.3600",
+              "1.23.17-gke.2000",
+              "1.23.17-gke.1700",
+              "1.23.17-gke.300",
+              "1.23.16-gke.2500",
+              "1.23.16-gke.1400",
+              "1.23.16-gke.1100",
+              "1.23.16-gke.200",
+              "1.23.15-gke.1900",
+              "1.23.15-gke.1400",
+              "1.23.14-gke.1800",
+              "1.23.14-gke.401",
+              "1.23.13-gke.900",
+              "1.23.12-gke.1600",
+              "1.23.12-gke.100",
+              "1.23.11-gke.300",
+              "1.23.10-gke.1000",
+              "1.23.9-gke.2100",
+              "1.23.9-gke.900",
+              "1.23.8-gke.1900",
+              "1.23.8-gke.400",
+              "1.23.7-gke.1400",
+              "1.23.6-gke.2200",
+              "1.23.6-gke.1700",
+              "1.23.6-gke.1501",
+              "1.23.6-gke.1500",
+              "1.23.5-gke.2400",
+              "1.23.5-gke.1503",
+              "1.23.5-gke.1501",
+              "1.22.17-gke.14100",
+              "1.22.17-gke.13400",
+              "1.22.17-gke.12700",
+              "1.22.17-gke.11400",
+              "1.22.17-gke.9400",
+              "1.22.17-gke.8000",
+              "1.22.17-gke.7500",
+              "1.22.17-gke.6100",
+              "1.22.17-gke.5400",
+              "1.22.17-gke.4300",
+              "1.22.17-gke.4000",
+              "1.22.17-gke.3100",
+              "1.22.17-gke.1900",
+              "1.22.17-gke.1400",
+              "1.22.16-gke.2000",
+              "1.22.16-gke.1300",
+              "1.22.15-gke.2500",
+              "1.22.15-gke.1000",
+              "1.22.15-gke.100",
+              "1.22.14-gke.300",
+              "1.22.13-gke.1000",
+              "1.22.12-gke.2300",
+              "1.22.12-gke.1200",
+              "1.22.12-gke.500",
+              "1.22.12-gke.300",
+              "1.22.11-gke.400",
+              "1.22.10-gke.600",
+              "1.22.9-gke.2000",
+              "1.22.9-gke.1500",
+              "1.22.9-gke.1300",
+              "1.22.8-gke.2200",
+              "1.22.8-gke.202",
+              "1.22.8-gke.201",
+              "1.22.8-gke.200",
+              "1.22.7-gke.1500",
+              "1.22.7-gke.1300",
+              "1.22.7-gke.900",
+              "1.22.7-gke.300",
+              "1.22.6-gke.1000",
+              "1.22.6-gke.300",
+              "1.22.4-gke.1501",
+              "1.22.3-gke.1500",
+              "1.21.14-gke.18800",
+              "1.21.14-gke.18100",
+              "1.21.14-gke.15800",
+              "1.21.14-gke.14600",
+              "1.21.14-gke.14100",
+              "1.21.14-gke.8500",
+              "1.21.14-gke.7100",
+              "1.21.14-gke.5300",
+              "1.21.14-gke.4300",
+              "1.21.14-gke.3000",
+              "1.21.14-gke.2700",
+              "1.21.14-gke.2100",
+              "1.21.14-gke.700",
+              "1.21.13-gke.900",
+              "1.21.12-gke.2200",
+              "1.21.12-gke.1700",
+              "1.21.12-gke.1500",
+              "1.21.11-gke.1900",
+              "1.21.11-gke.1100",
+              "1.21.11-gke.900",
+              "1.21.10-gke.2000",
+              "1.21.10-gke.1500",
+              "1.21.10-gke.1300",
+              "1.21.10-gke.400",
+              "1.21.9-gke.1002",
+              "1.21.9-gke.1001",
+              "1.21.9-gke.1000",
+              "1.21.9-gke.300",
+              "1.21.6-gke.1503",
+              "1.21.6-gke.1501",
+              "1.21.6-gke.1500",
+              "1.21.5-gke.1805",
+              "1.21.5-gke.1802",
+              "1.21.5-gke.1302",
+              "1.21.5-gke.1300",
+              "1.21.4-gke.2302",
+              "1.21.4-gke.2300",
+              "1.21.3-gke.2003",
+              "1.21.3-gke.2001",
+              "1.20.15-gke.13700",
+              "1.20.15-gke.13400",
+              "1.20.15-gke.12800",
+              "1.20.15-gke.11400",
+              "1.20.15-gke.9900",
+              "1.20.15-gke.8700",
+              "1.20.15-gke.8200",
+              "1.20.15-gke.8000",
+              "1.20.15-gke.6000",
+              "1.20.15-gke.5200",
+              "1.20.15-gke.5000",
+              "1.20.15-gke.4100",
+              "1.20.15-gke.3600",
+              "1.20.15-gke.3400",
+              "1.20.15-gke.2500",
+              "1.20.15-gke.1000",
+              "1.20.15-gke.300",
+              "1.20.12-gke.1500",
+              "1.20.11-gke.1801",
+              "1.20.11-gke.1300",
+              "1.20.10-gke.2100",
+              "1.20.10-gke.1600",
+              "1.20.10-gke.301",
+              "1.20.9-gke.2100",
+              "1.20.9-gke.1001",
+              "1.20.9-gke.1000",
+              "1.20.9-gke.701",
+              "1.20.9-gke.700",
+              "1.20.8-gke.2101",
+              "1.20.8-gke.2100",
+              "1.20.8-gke.900",
+              "1.20.8-gke.700",
+              "1.20.7-gke.2200",
+              "1.20.7-gke.1800",
+              "1.20.6-gke.1400",
+              "1.20.6-gke.1000",
+              "1.19.16-gke.15700",
+              "1.19.16-gke.14500",
+              "1.19.16-gke.14000",
+              "1.19.16-gke.13800",
+              "1.19.16-gke.11800",
+              "1.19.16-gke.11000",
+              "1.19.16-gke.10800",
+              "1.19.16-gke.9900",
+              "1.19.16-gke.9400",
+              "1.19.16-gke.9200",
+              "1.19.16-gke.8300",
+              "1.19.16-gke.6800",
+              "1.19.16-gke.6100",
+              "1.19.16-gke.3600",
+              "1.19.15-gke.1801",
+              "1.19.15-gke.1300",
+              "1.19.15-gke.500",
+              "1.19.14-gke.2300",
+              "1.19.14-gke.1900",
+              "1.19.14-gke.301",
+              "1.19.14-gke.300",
+              "1.19.13-gke.1900",
+              "1.19.13-gke.1200",
+              "1.19.13-gke.701",
+              "1.19.13-gke.700",
+              "1.19.12-gke.2101",
+              "1.19.12-gke.2100",
+              "1.19.12-gke.1100",
+              "1.19.12-gke.900",
+              "1.19.12-gke.700",
+              "1.19.11-gke.2101",
+              "1.19.11-gke.2100",
+              "1.19.11-gke.1701",
+              "1.19.11-gke.1700",
+              "1.19.10-gke.1701",
+              "1.19.10-gke.1700",
+              "1.19.10-gke.1601",
+              "1.19.10-gke.1600",
+              "1.19.10-gke.1001",
+              "1.19.10-gke.1000",
+              "1.19.9-gke.1900",
+              "1.19.9-gke.1400",
+              "1.19.9-gke.700",
+              "1.19.9-gke.100",
+              "1.19.8-gke.2000",
+              "1.19.8-gke.1600",
+              "1.19.8-gke.1000",
+              "1.19.7-gke.2503",
+              "1.19.7-gke.1500",
+              "1.19.7-gke.1302",
+              "1.19.7-gke.800",
+              "1.19.6-gke.1700",
+              "1.19.6-gke.1100",
+              "1.19.6-gke.600",
+              "1.18.20-gke.6101",
+              "1.18.20-gke.6000",
+              "1.18.20-gke.4501",
+              "1.18.20-gke.4500",
+              "1.18.20-gke.4100",
+              "1.18.20-gke.3300",
+              "1.18.20-gke.3001",
+              "1.18.20-gke.3000",
+              "1.18.20-gke.2300",
+              "1.18.20-gke.901",
+              "1.18.20-gke.900",
+              "1.18.20-gke.501",
+              "1.18.19-gke.2101",
+              "1.18.19-gke.2100",
+              "1.18.19-gke.1701",
+              "1.18.19-gke.1700",
+              "1.18.18-gke.1701",
+              "1.18.18-gke.1700",
+              "1.18.18-gke.1101",
+              "1.18.18-gke.1100",
+              "1.18.17-gke.1901",
+              "1.18.17-gke.1900",
+              "1.18.17-gke.1201",
+              "1.18.17-gke.1200",
+              "1.18.17-gke.700",
+              "1.18.17-gke.100",
+              "1.18.16-gke.2100",
+              "1.18.16-gke.1201",
+              "1.18.16-gke.1200",
+              "1.18.16-gke.502",
+              "1.18.16-gke.500",
+              "1.18.16-gke.302",
+              "1.18.16-gke.300",
+              "1.18.15-gke.2500",
+              "1.18.15-gke.1502",
+              "1.18.15-gke.1501",
+              "1.18.15-gke.1500",
+              "1.18.15-gke.1102",
+              "1.18.15-gke.1100",
+              "1.18.15-gke.800",
+              "1.18.14-gke.1600",
+              "1.18.14-gke.1200",
+              "1.18.12-gke.1210",
+              "1.18.12-gke.1206",
+              "1.18.12-gke.1205",
+              "1.18.12-gke.1201",
+              "1.18.12-gke.1200",
+              "1.18.12-gke.300",
+              "1.18.10-gke.2701",
+              "1.18.10-gke.2101",
+              "1.18.10-gke.1500",
+              "1.18.10-gke.601",
+              "1.18.9-gke.2501",
+              "1.18.9-gke.1501",
+              "1.18.9-gke.801",
+              "1.18.6-gke.4801",
+              "1.18.6-gke.3504",
+              "1.18.6-gke.3503",
+              "1.17.17-gke.9100",
+              "1.17.17-gke.8500",
+              "1.17.17-gke.8200",
+              "1.17.17-gke.7800",
+              "1.17.17-gke.7200",
+              "1.17.17-gke.6700",
+              "1.17.17-gke.6000",
+              "1.17.17-gke.5400",
+              "1.17.17-gke.4900",
+              "1.17.17-gke.4400",
+              "1.17.17-gke.3700",
+              "1.17.17-gke.3000",
+              "1.17.17-gke.2800",
+              "1.17.17-gke.2500",
+              "1.17.17-gke.1500",
+              "1.17.17-gke.1101",
+              "1.17.17-gke.1100",
+              "1.17.17-gke.600",
+              "1.17.16-gke.1600",
+              "1.17.16-gke.1300",
+              "1.17.15-gke.800",
+              "1.17.15-gke.300",
+              "1.17.14-gke.1600",
+              "1.17.14-gke.1200",
+              "1.17.14-gke.400",
+              "1.17.13-gke.2600",
+              "1.17.13-gke.2001",
+              "1.17.13-gke.1401",
+              "1.17.13-gke.1400",
+              "1.17.13-gke.600",
+              "1.17.12-gke.2502",
+              "1.17.12-gke.1504",
+              "1.17.12-gke.1501",
+              "1.17.12-gke.500",
+              "1.17.9-gke.6300",
+              "1.17.9-gke.1504",
+              "1.16.15-gke.14800",
+              "1.16.15-gke.12500",
+              "1.16.15-gke.11800",
+              "1.16.15-gke.10600",
+              "1.16.15-gke.7801",
+              "1.16.15-gke.7800",
+              "1.16.15-gke.7300",
+              "1.16.15-gke.6900",
+              "1.16.15-gke.6000",
+              "1.16.15-gke.5500",
+              "1.16.15-gke.4901",
+              "1.16.15-gke.4301",
+              "1.16.15-gke.4300",
+              "1.16.15-gke.3500",
+              "1.16.15-gke.2601",
+              "1.16.15-gke.1600",
+              "1.16.15-gke.500",
+              "1.16.13-gke.404",
+              "1.16.13-gke.403",
+              "1.16.13-gke.401",
+              "1.16.13-gke.400",
+              "1.16.13-gke.1",
+              "1.16.11-gke.5",
+              "1.16.10-gke.8",
+              "1.16.9-gke.6",
+              "1.16.9-gke.2",
+              "1.16.8-gke.15",
+              "1.16.8-gke.12",
+              "1.16.8-gke.9",
+              "1.15.12-gke.6002",
+              "1.15.12-gke.6001",
+              "1.15.12-gke.5000",
+              "1.15.12-gke.4002",
+              "1.15.12-gke.4000",
+              "1.15.12-gke.20",
+              "1.15.12-gke.17",
+              "1.15.12-gke.16",
+              "1.15.12-gke.13",
+              "1.15.12-gke.9",
+              "1.15.12-gke.6",
+              "1.15.12-gke.3",
+              "1.15.12-gke.2",
+              "1.15.11-gke.17",
+              "1.15.11-gke.15",
+              "1.15.11-gke.13",
+              "1.15.11-gke.12",
+              "1.15.11-gke.11",
+              "1.15.11-gke.9",
+              "1.15.11-gke.5",
+              "1.15.11-gke.3",
+              "1.15.11-gke.1",
+              "1.15.9-gke.26",
+              "1.15.9-gke.24",
+              "1.15.9-gke.22",
+              "1.15.9-gke.12",
+              "1.15.9-gke.9",
+              "1.15.9-gke.8",
+              "1.15.8-gke.3",
+              "1.15.8-gke.2",
+              "1.15.7-gke.23",
+              "1.15.7-gke.2",
+              "1.15.4-gke.22",
+              "1.14.10-gke.1504",
+              "1.14.10-gke.902",
+              "1.14.10-gke.50",
+              "1.14.10-gke.46",
+              "1.14.10-gke.45",
+              "1.14.10-gke.42",
+              "1.14.10-gke.41",
+              "1.14.10-gke.40",
+              "1.14.10-gke.37",
+              "1.14.10-gke.36",
+              "1.14.10-gke.34",
+              "1.14.10-gke.32",
+              "1.14.10-gke.31",
+              "1.14.10-gke.27",
+              "1.14.10-gke.24",
+              "1.14.10-gke.22",
+              "1.14.10-gke.21",
+              "1.14.10-gke.17",
+              "1.14.10-gke.0",
+              "1.14.9-gke.23",
+              "1.14.9-gke.2",
+              "1.14.9-gke.0",
+              "1.14.8-gke.33",
+              "1.14.8-gke.21",
+              "1.14.8-gke.18",
+              "1.14.8-gke.17",
+              "1.14.8-gke.14",
+              "1.14.8-gke.12",
+              "1.14.8-gke.7",
+              "1.14.8-gke.2",
+              "1.14.7-gke.40",
+              "1.14.7-gke.25",
+              "1.14.7-gke.23",
+              "1.14.7-gke.17",
+              "1.14.7-gke.14",
+              "1.14.7-gke.10",
+              "1.14.6-gke.13",
+              "1.14.6-gke.2",
+              "1.14.6-gke.1",
+              "1.14.3-gke.11",
+              "1.14.3-gke.10",
+              "1.14.3-gke.9",
+              "1.14.2-gke.9",
+              "1.14.1-gke.5",
+              "1.13.12-gke.30",
+              "1.13.12-gke.25",
+              "1.13.12-gke.17",
+              "1.13.12-gke.16",
+              "1.13.12-gke.14",
+              "1.13.12-gke.13",
+              "1.13.12-gke.10",
+              "1.13.12-gke.8",
+              "1.13.12-gke.4",
+              "1.13.12-gke.2",
+              "1.13.11-gke.23",
+              "1.13.11-gke.15",
+              "1.13.11-gke.14",
+              "1.13.11-gke.12",
+              "1.13.11-gke.11",
+              "1.13.11-gke.9",
+              "1.13.11-gke.5",
+              "1.13.10-gke.7",
+              "1.13.10-gke.0",
+              "1.13.9-gke.11",
+              "1.13.9-gke.3",
+              "1.13.7-gke.24",
+              "1.13.7-gke.19",
+              "1.13.7-gke.15",
+              "1.13.7-gke.8",
+              "1.13.7-gke.0",
+              "1.13.6-gke.13",
+              "1.13.6-gke.6",
+              "1.13.6-gke.5",
+              "1.13.6-gke.0",
+              "1.13.5-gke.10",
+              "1.12.10-gke.22",
+              "1.12.10-gke.20",
+              "1.12.10-gke.19",
+              "1.12.10-gke.18",
+              "1.12.10-gke.17",
+              "1.12.10-gke.15",
+              "1.12.10-gke.13",
+              "1.12.10-gke.11",
+              "1.12.10-gke.5",
+              "1.12.9-gke.16",
+              "1.12.9-gke.15",
+              "1.12.9-gke.13",
+              "1.12.9-gke.10",
+              "1.12.9-gke.7",
+              "1.12.9-gke.3",
+              "1.12.8-gke.12",
+              "1.12.8-gke.10",
+              "1.12.8-gke.7",
+              "1.12.8-gke.6",
+              "1.12.7-gke.26",
+              "1.12.7-gke.25",
+              "1.12.7-gke.24",
+              "1.12.7-gke.22",
+              "1.12.7-gke.21",
+              "1.12.7-gke.17",
+              "1.12.7-gke.10",
+              "1.12.7-gke.7",
+              "1.12.6-gke.11",
+              "1.12.6-gke.10",
+              "1.12.6-gke.7",
+              "1.12.5-gke.10",
+              "1.12.5-gke.5",
+              "1.11.10-gke.6",
+              "1.11.10-gke.5"
+            ],
+            "version_prefix": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "data",
+      "type": "google_container_engine_versions",
+      "name": "zone",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "default_cluster_version": "1.27.3-gke.100",
+            "id": "2023-12-18 15:23:39.931413677 +0000 UTC",
+            "latest_master_version": "1.28.3-gke.1286000",
+            "latest_node_version": "1.28.3-gke.1286000",
+            "location": "us-central1-a",
+            "project": "apigee-hybrid-terraform",
+            "release_channel_default_version": {
+              "RAPID": "1.28.3-gke.1203001",
+              "REGULAR": "1.27.3-gke.100",
+              "STABLE": "1.27.3-gke.100"
+            },
+            "release_channel_latest_version": {
+              "RAPID": "1.28.3-gke.1286000",
+              "REGULAR": "1.28.3-gke.1203001",
+              "STABLE": "1.27.5-gke.200"
+            },
+            "valid_master_versions": [
+              "1.28.3-gke.1286000",
+              "1.28.3-gke.1203001",
+              "1.27.7-gke.1293000",
+              "1.27.7-gke.1121000",
+              "1.27.5-gke.200",
+              "1.27.4-gke.900",
+              "1.27.3-gke.1700",
+              "1.27.3-gke.100",
+              "1.27.2-gke.1200",
+              "1.26.10-gke.1235000",
+              "1.26.10-gke.1101000",
+              "1.26.8-gke.200",
+              "1.26.7-gke.500",
+              "1.26.6-gke.1700",
+              "1.26.5-gke.2100",
+              "1.25.16-gke.1020000",
+              "1.25.15-gke.1115000",
+              "1.25.13-gke.200",
+              "1.25.12-gke.500",
+              "1.25.10-gke.2700",
+              "1.24.17-gke.2347000",
+              "1.24.17-gke.2266000",
+              "1.24.17-gke.200",
+              "1.24.16-gke.500"
+            ],
+            "valid_node_versions": [
+              "1.28.3-gke.1286000",
+              "1.28.3-gke.1203001",
+              "1.27.7-gke.1293000",
+              "1.27.7-gke.1121000",
+              "1.27.7-gke.1088000",
+              "1.27.7-gke.1056000",
+              "1.27.7-gke.1038000",
+              "1.27.6-gke.1506000",
+              "1.27.6-gke.1445000",
+              "1.27.6-gke.1248000",
+              "1.27.5-gke.200",
+              "1.27.4-gke.900",
+              "1.27.3-gke.1700",
+              "1.27.3-gke.100",
+              "1.27.2-gke.2100",
+              "1.27.2-gke.1200",
+              "1.26.10-gke.1235000",
+              "1.26.10-gke.1101000",
+              "1.26.10-gke.1073000",
+              "1.26.10-gke.1038000",
+              "1.26.10-gke.1024000",
+              "1.26.9-gke.1507000",
+              "1.26.9-gke.1437000",
+              "1.26.8-gke.200",
+              "1.26.7-gke.500",
+              "1.26.6-gke.1700",
+              "1.26.5-gke.2700",
+              "1.26.5-gke.2100",
+              "1.26.5-gke.1400",
+              "1.26.5-gke.1200",
+              "1.26.4-gke.1400",
+              "1.26.4-gke.500",
+              "1.26.3-gke.1000",
+              "1.26.3-gke.400",
+              "1.26.2-gke.1000",
+              "1.26.1-gke.1500",
+              "1.25.16-gke.1020000",
+              "1.25.15-gke.1115000",
+              "1.25.15-gke.1083000",
+              "1.25.15-gke.1049000",
+              "1.25.15-gke.1033000",
+              "1.25.14-gke.1474000",
+              "1.25.14-gke.1421000",
+              "1.25.13-gke.200",
+              "1.25.12-gke.500",
+              "1.25.11-gke.1700",
+              "1.25.10-gke.2700",
+              "1.25.10-gke.2100",
+              "1.25.10-gke.1400",
+              "1.25.10-gke.1200",
+              "1.25.9-gke.2300",
+              "1.25.9-gke.400",
+              "1.25.8-gke.1000",
+              "1.25.8-gke.500",
+              "1.25.7-gke.1000",
+              "1.25.6-gke.1000",
+              "1.25.6-gke.200",
+              "1.25.5-gke.2000",
+              "1.25.5-gke.1500",
+              "1.25.4-gke.2100",
+              "1.25.3-gke.800",
+              "1.24.17-gke.2347000",
+              "1.24.17-gke.2266000",
+              "1.24.17-gke.2230000",
+              "1.24.17-gke.2211000",
+              "1.24.17-gke.2198000",
+              "1.24.17-gke.2155000",
+              "1.24.17-gke.2113000",
+              "1.24.17-gke.200",
+              "1.24.16-gke.500",
+              "1.24.15-gke.1700",
+              "1.24.14-gke.2700",
+              "1.24.14-gke.2100",
+              "1.24.14-gke.1400",
+              "1.24.14-gke.1200",
+              "1.24.13-gke.2500",
+              "1.24.13-gke.500",
+              "1.24.12-gke.1000",
+              "1.24.12-gke.500",
+              "1.24.11-gke.1000",
+              "1.24.10-gke.2300",
+              "1.24.10-gke.1200",
+              "1.24.9-gke.3200",
+              "1.24.9-gke.2000",
+              "1.24.9-gke.1500",
+              "1.24.8-gke.2000",
+              "1.24.8-gke.401",
+              "1.24.7-gke.900",
+              "1.24.6-gke.1500",
+              "1.24.5-gke.600",
+              "1.24.4-gke.800",
+              "1.24.3-gke.2100",
+              "1.24.3-gke.900",
+              "1.24.3-gke.200",
+              "1.24.2-gke.1900",
+              "1.24.2-gke.300",
+              "1.24.1-gke.1800",
+              "1.24.1-gke.1400",
+              "1.23.17-gke.10700",
+              "1.23.17-gke.10000",
+              "1.23.17-gke.8400",
+              "1.23.17-gke.7700",
+              "1.23.17-gke.7000",
+              "1.23.17-gke.6800",
+              "1.23.17-gke.5600",
+              "1.23.17-gke.3600",
+              "1.23.17-gke.2000",
+              "1.23.17-gke.1700",
+              "1.23.17-gke.300",
+              "1.23.16-gke.2500",
+              "1.23.16-gke.1400",
+              "1.23.16-gke.1100",
+              "1.23.16-gke.200",
+              "1.23.15-gke.1900",
+              "1.23.15-gke.1400",
+              "1.23.14-gke.1800",
+              "1.23.14-gke.401",
+              "1.23.13-gke.900",
+              "1.23.12-gke.1600",
+              "1.23.12-gke.100",
+              "1.23.11-gke.300",
+              "1.23.10-gke.1000",
+              "1.23.9-gke.2100",
+              "1.23.9-gke.900",
+              "1.23.8-gke.1900",
+              "1.23.8-gke.400",
+              "1.23.7-gke.1400",
+              "1.23.6-gke.2200",
+              "1.23.6-gke.1700",
+              "1.23.6-gke.1501",
+              "1.23.6-gke.1500",
+              "1.23.5-gke.2400",
+              "1.23.5-gke.1503",
+              "1.23.5-gke.1501",
+              "1.22.17-gke.14100",
+              "1.22.17-gke.13400",
+              "1.22.17-gke.12700",
+              "1.22.17-gke.11400",
+              "1.22.17-gke.9400",
+              "1.22.17-gke.8000",
+              "1.22.17-gke.7500",
+              "1.22.17-gke.6100",
+              "1.22.17-gke.5400",
+              "1.22.17-gke.4300",
+              "1.22.17-gke.4000",
+              "1.22.17-gke.3100",
+              "1.22.17-gke.1900",
+              "1.22.17-gke.1400",
+              "1.22.16-gke.2000",
+              "1.22.16-gke.1300",
+              "1.22.15-gke.2500",
+              "1.22.15-gke.1000",
+              "1.22.15-gke.100",
+              "1.22.14-gke.300",
+              "1.22.13-gke.1000",
+              "1.22.12-gke.2300",
+              "1.22.12-gke.1200",
+              "1.22.12-gke.500",
+              "1.22.12-gke.300",
+              "1.22.11-gke.400",
+              "1.22.10-gke.600",
+              "1.22.9-gke.2000",
+              "1.22.9-gke.1500",
+              "1.22.9-gke.1300",
+              "1.22.8-gke.2200",
+              "1.22.8-gke.202",
+              "1.22.8-gke.201",
+              "1.22.8-gke.200",
+              "1.22.7-gke.1500",
+              "1.22.7-gke.1300",
+              "1.22.7-gke.900",
+              "1.22.7-gke.300",
+              "1.22.6-gke.1000",
+              "1.22.6-gke.300",
+              "1.22.4-gke.1501",
+              "1.22.3-gke.1500",
+              "1.21.14-gke.18800",
+              "1.21.14-gke.18100",
+              "1.21.14-gke.15800",
+              "1.21.14-gke.14600",
+              "1.21.14-gke.14100",
+              "1.21.14-gke.8500",
+              "1.21.14-gke.7100",
+              "1.21.14-gke.5300",
+              "1.21.14-gke.4300",
+              "1.21.14-gke.3000",
+              "1.21.14-gke.2700",
+              "1.21.14-gke.2100",
+              "1.21.14-gke.700",
+              "1.21.13-gke.900",
+              "1.21.12-gke.2200",
+              "1.21.12-gke.1700",
+              "1.21.12-gke.1500",
+              "1.21.11-gke.1900",
+              "1.21.11-gke.1100",
+              "1.21.11-gke.900",
+              "1.21.10-gke.2000",
+              "1.21.10-gke.1500",
+              "1.21.10-gke.1300",
+              "1.21.10-gke.400",
+              "1.21.9-gke.1002",
+              "1.21.9-gke.1001",
+              "1.21.9-gke.1000",
+              "1.21.9-gke.300",
+              "1.21.6-gke.1503",
+              "1.21.6-gke.1501",
+              "1.21.6-gke.1500",
+              "1.21.5-gke.1805",
+              "1.21.5-gke.1802",
+              "1.21.5-gke.1302",
+              "1.21.5-gke.1300",
+              "1.21.4-gke.2302",
+              "1.21.4-gke.2300",
+              "1.21.3-gke.2003",
+              "1.21.3-gke.2001",
+              "1.20.15-gke.13700",
+              "1.20.15-gke.13400",
+              "1.20.15-gke.12800",
+              "1.20.15-gke.11400",
+              "1.20.15-gke.9900",
+              "1.20.15-gke.8700",
+              "1.20.15-gke.8200",
+              "1.20.15-gke.8000",
+              "1.20.15-gke.6000",
+              "1.20.15-gke.5200",
+              "1.20.15-gke.5000",
+              "1.20.15-gke.4100",
+              "1.20.15-gke.3600",
+              "1.20.15-gke.3400",
+              "1.20.15-gke.2500",
+              "1.20.15-gke.1000",
+              "1.20.15-gke.300",
+              "1.20.12-gke.1500",
+              "1.20.11-gke.1801",
+              "1.20.11-gke.1300",
+              "1.20.10-gke.2100",
+              "1.20.10-gke.1600",
+              "1.20.10-gke.301",
+              "1.20.9-gke.2100",
+              "1.20.9-gke.1001",
+              "1.20.9-gke.1000",
+              "1.20.9-gke.701",
+              "1.20.9-gke.700",
+              "1.20.8-gke.2101",
+              "1.20.8-gke.2100",
+              "1.20.8-gke.900",
+              "1.20.8-gke.700",
+              "1.20.7-gke.2200",
+              "1.20.7-gke.1800",
+              "1.20.6-gke.1400",
+              "1.20.6-gke.1000",
+              "1.19.16-gke.15700",
+              "1.19.16-gke.14500",
+              "1.19.16-gke.14000",
+              "1.19.16-gke.13800",
+              "1.19.16-gke.11800",
+              "1.19.16-gke.11000",
+              "1.19.16-gke.10800",
+              "1.19.16-gke.9900",
+              "1.19.16-gke.9400",
+              "1.19.16-gke.9200",
+              "1.19.16-gke.8300",
+              "1.19.16-gke.6800",
+              "1.19.16-gke.6100",
+              "1.19.16-gke.3600",
+              "1.19.15-gke.1801",
+              "1.19.15-gke.1300",
+              "1.19.15-gke.500",
+              "1.19.14-gke.2300",
+              "1.19.14-gke.1900",
+              "1.19.14-gke.301",
+              "1.19.14-gke.300",
+              "1.19.13-gke.1900",
+              "1.19.13-gke.1200",
+              "1.19.13-gke.701",
+              "1.19.13-gke.700",
+              "1.19.12-gke.2101",
+              "1.19.12-gke.2100",
+              "1.19.12-gke.1100",
+              "1.19.12-gke.900",
+              "1.19.12-gke.700",
+              "1.19.11-gke.2101",
+              "1.19.11-gke.2100",
+              "1.19.11-gke.1701",
+              "1.19.11-gke.1700",
+              "1.19.10-gke.1701",
+              "1.19.10-gke.1700",
+              "1.19.10-gke.1601",
+              "1.19.10-gke.1600",
+              "1.19.10-gke.1001",
+              "1.19.10-gke.1000",
+              "1.19.9-gke.1900",
+              "1.19.9-gke.1400",
+              "1.19.9-gke.700",
+              "1.19.9-gke.100",
+              "1.19.8-gke.2000",
+              "1.19.8-gke.1600",
+              "1.19.8-gke.1000",
+              "1.19.7-gke.2503",
+              "1.19.7-gke.1500",
+              "1.19.7-gke.1302",
+              "1.19.7-gke.800",
+              "1.19.6-gke.1700",
+              "1.19.6-gke.1100",
+              "1.19.6-gke.600",
+              "1.18.20-gke.6101",
+              "1.18.20-gke.6000",
+              "1.18.20-gke.4501",
+              "1.18.20-gke.4500",
+              "1.18.20-gke.4100",
+              "1.18.20-gke.3300",
+              "1.18.20-gke.3001",
+              "1.18.20-gke.3000",
+              "1.18.20-gke.2300",
+              "1.18.20-gke.901",
+              "1.18.20-gke.900",
+              "1.18.20-gke.501",
+              "1.18.19-gke.2101",
+              "1.18.19-gke.2100",
+              "1.18.19-gke.1701",
+              "1.18.19-gke.1700",
+              "1.18.18-gke.1701",
+              "1.18.18-gke.1700",
+              "1.18.18-gke.1101",
+              "1.18.18-gke.1100",
+              "1.18.17-gke.1901",
+              "1.18.17-gke.1900",
+              "1.18.17-gke.1201",
+              "1.18.17-gke.1200",
+              "1.18.17-gke.700",
+              "1.18.17-gke.100",
+              "1.18.16-gke.2100",
+              "1.18.16-gke.1201",
+              "1.18.16-gke.1200",
+              "1.18.16-gke.502",
+              "1.18.16-gke.500",
+              "1.18.16-gke.302",
+              "1.18.16-gke.300",
+              "1.18.15-gke.2500",
+              "1.18.15-gke.1502",
+              "1.18.15-gke.1501",
+              "1.18.15-gke.1500",
+              "1.18.15-gke.1102",
+              "1.18.15-gke.1100",
+              "1.18.15-gke.800",
+              "1.18.14-gke.1600",
+              "1.18.14-gke.1200",
+              "1.18.12-gke.1210",
+              "1.18.12-gke.1206",
+              "1.18.12-gke.1205",
+              "1.18.12-gke.1201",
+              "1.18.12-gke.1200",
+              "1.18.12-gke.300",
+              "1.18.10-gke.2701",
+              "1.18.10-gke.2101",
+              "1.18.10-gke.1500",
+              "1.18.10-gke.601",
+              "1.18.9-gke.2501",
+              "1.18.9-gke.1501",
+              "1.18.9-gke.801",
+              "1.18.6-gke.4801",
+              "1.18.6-gke.3504",
+              "1.18.6-gke.3503",
+              "1.17.17-gke.9100",
+              "1.17.17-gke.8500",
+              "1.17.17-gke.8200",
+              "1.17.17-gke.7800",
+              "1.17.17-gke.7200",
+              "1.17.17-gke.6700",
+              "1.17.17-gke.6000",
+              "1.17.17-gke.5400",
+              "1.17.17-gke.4900",
+              "1.17.17-gke.4400",
+              "1.17.17-gke.3700",
+              "1.17.17-gke.3000",
+              "1.17.17-gke.2800",
+              "1.17.17-gke.2500",
+              "1.17.17-gke.1500",
+              "1.17.17-gke.1101",
+              "1.17.17-gke.1100",
+              "1.17.17-gke.600",
+              "1.17.16-gke.1600",
+              "1.17.16-gke.1300",
+              "1.17.15-gke.800",
+              "1.17.15-gke.300",
+              "1.17.14-gke.1600",
+              "1.17.14-gke.1200",
+              "1.17.14-gke.400",
+              "1.17.13-gke.2600",
+              "1.17.13-gke.2001",
+              "1.17.13-gke.1401",
+              "1.17.13-gke.1400",
+              "1.17.13-gke.600",
+              "1.17.12-gke.2502",
+              "1.17.12-gke.1504",
+              "1.17.12-gke.1501",
+              "1.17.12-gke.500",
+              "1.17.9-gke.6300",
+              "1.17.9-gke.1504",
+              "1.16.15-gke.14800",
+              "1.16.15-gke.12500",
+              "1.16.15-gke.11800",
+              "1.16.15-gke.10600",
+              "1.16.15-gke.7801",
+              "1.16.15-gke.7800",
+              "1.16.15-gke.7300",
+              "1.16.15-gke.6900",
+              "1.16.15-gke.6000",
+              "1.16.15-gke.5500",
+              "1.16.15-gke.4901",
+              "1.16.15-gke.4301",
+              "1.16.15-gke.4300",
+              "1.16.15-gke.3500",
+              "1.16.15-gke.2601",
+              "1.16.15-gke.1600",
+              "1.16.15-gke.500",
+              "1.16.13-gke.404",
+              "1.16.13-gke.403",
+              "1.16.13-gke.401",
+              "1.16.13-gke.400",
+              "1.16.13-gke.1",
+              "1.16.11-gke.5",
+              "1.16.10-gke.8",
+              "1.16.9-gke.6",
+              "1.16.9-gke.2",
+              "1.16.8-gke.15",
+              "1.16.8-gke.12",
+              "1.16.8-gke.9",
+              "1.15.12-gke.6002",
+              "1.15.12-gke.6001",
+              "1.15.12-gke.5000",
+              "1.15.12-gke.4002",
+              "1.15.12-gke.4000",
+              "1.15.12-gke.20",
+              "1.15.12-gke.17",
+              "1.15.12-gke.16",
+              "1.15.12-gke.13",
+              "1.15.12-gke.9",
+              "1.15.12-gke.6",
+              "1.15.12-gke.3",
+              "1.15.12-gke.2",
+              "1.15.11-gke.17",
+              "1.15.11-gke.15",
+              "1.15.11-gke.13",
+              "1.15.11-gke.12",
+              "1.15.11-gke.11",
+              "1.15.11-gke.9",
+              "1.15.11-gke.5",
+              "1.15.11-gke.3",
+              "1.15.11-gke.1",
+              "1.15.9-gke.26",
+              "1.15.9-gke.24",
+              "1.15.9-gke.22",
+              "1.15.9-gke.12",
+              "1.15.9-gke.9",
+              "1.15.9-gke.8",
+              "1.15.8-gke.3",
+              "1.15.8-gke.2",
+              "1.15.7-gke.23",
+              "1.15.7-gke.2",
+              "1.15.4-gke.22",
+              "1.14.10-gke.1504",
+              "1.14.10-gke.902",
+              "1.14.10-gke.50",
+              "1.14.10-gke.46",
+              "1.14.10-gke.45",
+              "1.14.10-gke.42",
+              "1.14.10-gke.41",
+              "1.14.10-gke.40",
+              "1.14.10-gke.37",
+              "1.14.10-gke.36",
+              "1.14.10-gke.34",
+              "1.14.10-gke.32",
+              "1.14.10-gke.31",
+              "1.14.10-gke.27",
+              "1.14.10-gke.24",
+              "1.14.10-gke.22",
+              "1.14.10-gke.21",
+              "1.14.10-gke.17",
+              "1.14.10-gke.0",
+              "1.14.9-gke.23",
+              "1.14.9-gke.2",
+              "1.14.9-gke.0",
+              "1.14.8-gke.33",
+              "1.14.8-gke.21",
+              "1.14.8-gke.18",
+              "1.14.8-gke.17",
+              "1.14.8-gke.14",
+              "1.14.8-gke.12",
+              "1.14.8-gke.7",
+              "1.14.8-gke.2",
+              "1.14.7-gke.40",
+              "1.14.7-gke.25",
+              "1.14.7-gke.23",
+              "1.14.7-gke.17",
+              "1.14.7-gke.14",
+              "1.14.7-gke.10",
+              "1.14.6-gke.13",
+              "1.14.6-gke.2",
+              "1.14.6-gke.1",
+              "1.14.3-gke.11",
+              "1.14.3-gke.10",
+              "1.14.3-gke.9",
+              "1.14.2-gke.9",
+              "1.14.1-gke.5",
+              "1.13.12-gke.30",
+              "1.13.12-gke.25",
+              "1.13.12-gke.17",
+              "1.13.12-gke.16",
+              "1.13.12-gke.14",
+              "1.13.12-gke.13",
+              "1.13.12-gke.10",
+              "1.13.12-gke.8",
+              "1.13.12-gke.4",
+              "1.13.12-gke.2",
+              "1.13.11-gke.23",
+              "1.13.11-gke.15",
+              "1.13.11-gke.14",
+              "1.13.11-gke.12",
+              "1.13.11-gke.11",
+              "1.13.11-gke.9",
+              "1.13.11-gke.5",
+              "1.13.10-gke.7",
+              "1.13.10-gke.0",
+              "1.13.9-gke.11",
+              "1.13.9-gke.3",
+              "1.13.7-gke.24",
+              "1.13.7-gke.19",
+              "1.13.7-gke.15",
+              "1.13.7-gke.8",
+              "1.13.7-gke.0",
+              "1.13.6-gke.13",
+              "1.13.6-gke.6",
+              "1.13.6-gke.5",
+              "1.13.6-gke.0",
+              "1.13.5-gke.10",
+              "1.12.10-gke.22",
+              "1.12.10-gke.20",
+              "1.12.10-gke.19",
+              "1.12.10-gke.18",
+              "1.12.10-gke.17",
+              "1.12.10-gke.15",
+              "1.12.10-gke.13",
+              "1.12.10-gke.11",
+              "1.12.10-gke.5",
+              "1.12.9-gke.16",
+              "1.12.9-gke.15",
+              "1.12.9-gke.13",
+              "1.12.9-gke.10",
+              "1.12.9-gke.7",
+              "1.12.9-gke.3",
+              "1.12.8-gke.12",
+              "1.12.8-gke.10",
+              "1.12.8-gke.7",
+              "1.12.8-gke.6",
+              "1.12.7-gke.26",
+              "1.12.7-gke.25",
+              "1.12.7-gke.24",
+              "1.12.7-gke.22",
+              "1.12.7-gke.21",
+              "1.12.7-gke.17",
+              "1.12.7-gke.10",
+              "1.12.7-gke.7",
+              "1.12.6-gke.11",
+              "1.12.6-gke.10",
+              "1.12.6-gke.7",
+              "1.12.5-gke.10",
+              "1.12.5-gke.5",
+              "1.11.10-gke.6",
+              "1.11.10-gke.5"
+            ],
+            "version_prefix": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "managed",
+      "type": "google_container_cluster",
+      "name": "primary",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "addons_config": [
+              {
+                "cloudrun_config": [],
+                "config_connector_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "dns_cache_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "gce_persistent_disk_csi_driver_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "gcp_filestore_csi_driver_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "gcs_fuse_csi_driver_config": [],
+                "gke_backup_agent_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "horizontal_pod_autoscaling": [
+                  {
+                    "disabled": true
+                  }
+                ],
+                "http_load_balancing": [
+                  {
+                    "disabled": false
+                  }
+                ],
+                "network_policy_config": [
+                  {
+                    "disabled": true
+                  }
+                ]
+              }
+            ],
+            "allow_net_admin": null,
+            "authenticator_groups_config": [],
+            "binary_authorization": [
+              {
+                "enabled": false,
+                "evaluation_mode": ""
+              }
+            ],
+            "cluster_autoscaling": [
+              {
+                "auto_provisioning_defaults": [],
+                "autoscaling_profile": "BALANCED",
+                "enabled": false,
+                "resource_limits": []
+              }
+            ],
+            "cluster_ipv4_cidr": "10.188.0.0/20",
+            "confidential_nodes": [],
+            "cost_management_config": [],
+            "database_encryption": [
+              {
+                "key_name": "",
+                "state": "DECRYPTED"
+              }
+            ],
+            "datapath_provider": "",
+            "default_max_pods_per_node": 110,
+            "default_snat_status": [
+              {
+                "disabled": false
+              }
+            ],
+            "deletion_protection": true,
+            "description": "",
+            "dns_config": [],
+            "enable_autopilot": false,
+            "enable_intranode_visibility": false,
+            "enable_k8s_beta_apis": [],
+            "enable_kubernetes_alpha": false,
+            "enable_l4_ilb_subsetting": false,
+            "enable_legacy_abac": false,
+            "enable_shielded_nodes": true,
+            "enable_tpu": false,
+            "endpoint": "10.0.0.2",
+            "fleet": [],
+            "gateway_api_config": [],
+            "id": "projects/apigee-hybrid-terraform/locations/us-central1/clusters/cluster-1",
+            "identity_service_config": [],
+            "initial_node_count": 0,
+            "ip_allocation_policy": [
+              {
+                "additional_pod_ranges_config": [],
+                "cluster_ipv4_cidr_block": "10.188.0.0/20",
+                "cluster_secondary_range_name": "gke-secondary-pods",
+                "pod_cidr_overprovision_config": [
+                  {
+                    "disabled": false
+                  }
+                ],
+                "services_ipv4_cidr_block": "10.192.0.0/20",
+                "services_secondary_range_name": "gke-secondary-services",
+                "stack_type": "IPV4"
+              }
+            ],
+            "label_fingerprint": "a9dc16a7",
+            "location": "us-central1",
+            "logging_config": [
+              {
+                "enable_components": [
+                  "SYSTEM_COMPONENTS",
+                  "WORKLOADS"
+                ]
+              }
+            ],
+            "logging_service": "logging.googleapis.com/kubernetes",
+            "maintenance_policy": [
+              {
+                "daily_maintenance_window": [
+                  {
+                    "duration": "PT4H0M0S",
+                    "start_time": "05:00"
+                  }
+                ],
+                "maintenance_exclusion": [],
+                "recurring_window": []
+              }
+            ],
+            "master_auth": [
+              {
+                "client_certificate": "",
+                "client_certificate_config": [
+                  {
+                    "issue_client_certificate": false
+                  }
+                ],
+                "client_key": "",
+                "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRVWNrUzNRdFU0UjlFc0RrRnVvRStnekFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlReE5UYzJNbU14WmkwMU0yWTNMVFF3WldJdFlXSTJNQzB5TVRWbFpUazNOVEF5TmpZdwpJQmNOTWpNeE1qRTRNVFF5TXpReFdoZ1BNakExTXpFeU1UQXhOVEl6TkRGYU1DOHhMVEFyQmdOVkJBTVRKREUxCk56WXlZekZtTFRVelpqY3ROREJsWWkxaFlqWXdMVEl4TldWbE9UYzFNREkyTmpDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQUtnNGdXN1FWSWpJYlNZUnhEY3BHSHo5cGJKYkJ1UUMrWU93QlMxQwp5dEtCNlJ5WjljV05vUGk3Yjh5SFZVVFFVbEVXU3NvY1d5b2dxeVlhZ0NNb2MrSFdlV1BKZFlpOVZOK0l4UXBRCm9PWGRWQjYreXZrZk00TDU5RW5BcUF2akVYa1NYTXJvYi85NCt5TnpYeHU4a1E1SjVBU0dUbUIvcHN2YngrWi8KUGtnTWdnS0t3c1lRdjZUVGNzUXRnczhVaHY2YXdtRVhkc01PS1ZwQm5vM0NTZFF6aytIdEFqeHE0NTQrMENWUAorYTEvek80OEtEckFqVWJFRWdRdjU2R010SzVCcmRqenJ2ZCsrSDBtaHMwazJwbGVHYWlrN2t5WVpSbXVvMVc4CnVKSC9pY1ZBTkVYUmtUQWxzMjRQTTFPdFkzOW5oQzBDR2xFR0Nic1llSERtLzNxVmVTdnV5L3NRdkkrRVF5TmoKVFc1RStNM25rQzJLR3g5Y1J3bURmZVhWNzNLOVNxK20ramU1VVA0ZTFRWVNpcjhVZEk1T3R3cmpxMzU0V0QvdAp6YWFhM3plMU1rZHI5WDBYOENIU3c5RXYycVJqN3ZhbGZKTlVjbEEzcDNmN1FUYjJNbXpIc3FJbFlIQWtobldaCk1xTHUyZ3g3S3ZEQXNGTTllbnRvaVdTcjlRSURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVTTk9xek92MUJ3aE1DYTYvWXh0dExZTFhNRVl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFGSjE0NE95SVE1WldDZ2o1ZktKL2liclF6VmltcE1DV3dSM01VTTcxQUNYCjVob0pYMmppTCtzU0M4dU1ESVVlUWhPb1o4WndoY09BdzZpMUliN3FPQ09kajZKOU4xTjdDMGRtS25qdmdoTXMKcTNKbUIxdUdmNzdUbzNwOUNoTHhpTW4vSFNmbnNXVjlyOHVCUlc0R2lUclJOb0s1NThMenl1R3dhcUJjN0pvSgpTNXFyTG1vSUVFM1owcVJocTBFQ3Z4R0x2ZENBaXRPSWQvMTM1YjM5L3htbDh3VUZmWlRiVm9WeDhyYXl2UzB0CmxUUkl2SEs1MU92bWZxaitVUzJTenczYTVSYkdVTUxDS0xrRXlxdnQwOFBlUlhEN2ZMeG5VdFd2QzZYYTNHZ1cKSENsUXdlNTdqS1gwcWM1dW9mYjJsVjFSdGNLNlpZZE9OUHEwbit6bWNZMldkVnFFdG0yc3didGovVDBRS3VEUApRTkpDckVTYysvcE93SUFhY0pzVUlKdkEvRnFDSW4zRStLRzJhN0IzKzJrZXZMSlVLbkRodWRTQ2RTSzBkVVRaCnNTTEZRTjMrb2k0SXpsOER3MzgxbUEvZG5HU0psNUNqQ2RXNTE4bkxGSVZjd0ZIQ3ZBeUhGdkx1UHdTS1cyT2gKdE1ES2JtbVJveHhWaUVmVmhCOVh3UT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+              }
+            ],
+            "master_authorized_networks_config": [
+              {
+                "cidr_blocks": [
+                  {
+                    "cidr_block": "10.20.0.0/20",
+                    "display_name": "us-central1"
+                  }
+                ],
+                "gcp_public_cidrs_access_enabled": false
+              }
+            ],
+            "master_version": "1.27.3-gke.100",
+            "mesh_certificates": [
+              {
+                "enable_certificates": false
+              }
+            ],
+            "min_master_version": null,
+            "monitoring_config": [
+              {
+                "advanced_datapath_observability_config": [
+                  {
+                    "enable_metrics": false,
+                    "relay_mode": ""
+                  }
+                ],
+                "enable_components": [
+                  "SYSTEM_COMPONENTS"
+                ],
+                "managed_prometheus": [
+                  {
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "monitoring_service": "monitoring.googleapis.com/kubernetes",
+            "name": "cluster-1",
+            "network": "projects/apigee-hybrid-terraform/global/networks/apigee-vpc",
+            "network_policy": [
+              {
+                "enabled": false,
+                "provider": "PROVIDER_UNSPECIFIED"
+              }
+            ],
+            "networking_mode": "VPC_NATIVE",
+            "node_config": [
+              {
+                "advanced_machine_features": [],
+                "boot_disk_kms_key": "",
+                "confidential_nodes": [],
+                "disk_size_gb": 100,
+                "disk_type": "pd-balanced",
+                "effective_taints": [],
+                "ephemeral_storage_local_ssd_config": [],
+                "fast_socket": [],
+                "gcfs_config": [],
+                "guest_accelerator": [],
+                "gvnic": [],
+                "host_maintenance_policy": [],
+                "image_type": "COS_CONTAINERD",
+                "kubelet_config": [],
+                "labels": {},
+                "linux_node_config": [],
+                "local_nvme_ssd_block_config": [],
+                "local_ssd_count": 0,
+                "logging_variant": "DEFAULT",
+                "machine_type": "e2-standard-4",
+                "metadata": {
+                  "disable-legacy-endpoints": "true"
+                },
+                "min_cpu_platform": "",
+                "node_group": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/cloud-platform",
+                  "https://www.googleapis.com/auth/userinfo.email"
+                ],
+                "preemptible": false,
+                "reservation_affinity": [],
+                "resource_labels": {},
+                "service_account": "tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+                "shielded_instance_config": [
+                  {
+                    "enable_integrity_monitoring": true,
+                    "enable_secure_boot": false
+                  }
+                ],
+                "sole_tenant_config": [],
+                "spot": false,
+                "tags": [
+                  "gke-cluster-1",
+                  "gke-cluster-1-default-pool",
+                  "apigee-data"
+                ],
+                "taint": [],
+                "workload_metadata_config": [
+                  {
+                    "mode": "GKE_METADATA"
+                  }
+                ]
+              }
+            ],
+            "node_locations": [
+              "us-central1-a",
+              "us-central1-b",
+              "us-central1-f"
+            ],
+            "node_pool": [
+              {
+                "autoscaling": [],
+                "initial_node_count": 0,
+                "instance_group_urls": [
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroupManagers/gke-cluster-1-default-pool-cea88658-grp",
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-b/instanceGroupManagers/gke-cluster-1-default-pool-c078edbe-grp",
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-f/instanceGroupManagers/gke-cluster-1-default-pool-6737326f-grp"
+                ],
+                "managed_instance_group_urls": [
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroups/gke-cluster-1-default-pool-cea88658-grp",
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-b/instanceGroups/gke-cluster-1-default-pool-c078edbe-grp",
+                  "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-f/instanceGroups/gke-cluster-1-default-pool-6737326f-grp"
+                ],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 110,
+                "name": "default-pool",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.188.0.0/20",
+                    "pod_range": "gke-secondary-pods"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [],
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [],
+                    "guest_accelerator": [],
+                    "gvnic": [],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "e2-standard-4",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/cloud-platform",
+                      "https://www.googleapis.com/auth/userinfo.email"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [],
+                    "resource_labels": null,
+                    "service_account": "tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": false
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [
+                      "gke-cluster-1",
+                      "gke-cluster-1-default-pool",
+                      "apigee-data"
+                    ],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "us-central1-a",
+                  "us-central1-b",
+                  "us-central1-f"
+                ],
+                "placement_policy": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.27.3-gke.100"
+              }
+            ],
+            "node_pool_auto_config": [],
+            "node_pool_defaults": [
+              {
+                "node_config_defaults": [
+                  {
+                    "logging_variant": "DEFAULT"
+                  }
+                ]
+              }
+            ],
+            "node_version": "1.27.3-gke.100",
+            "notification_config": [
+              {
+                "pubsub": [
+                  {
+                    "enabled": false,
+                    "filter": [],
+                    "topic": ""
+                  }
+                ]
+              }
+            ],
+            "operation": null,
+            "private_cluster_config": [
+              {
+                "enable_private_endpoint": true,
+                "enable_private_nodes": true,
+                "master_global_access_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "master_ipv4_cidr_block": "10.0.0.0/28",
+                "peering_name": "gke-n8dc3e7e1ad2c873612c-e877-f69e-peer",
+                "private_endpoint": "10.0.0.2",
+                "private_endpoint_subnetwork": "",
+                "public_endpoint": "23.251.151.78"
+              }
+            ],
+            "private_ipv6_google_access": "",
+            "project": "apigee-hybrid-terraform",
+            "release_channel": [
+              {
+                "channel": "REGULAR"
+              }
+            ],
+            "remove_default_node_pool": false,
+            "resource_labels": null,
+            "resource_usage_export_config": [],
+            "security_posture_config": [
+              {
+                "mode": "DISABLED",
+                "vulnerability_mode": "VULNERABILITY_DISABLED"
+              }
+            ],
+            "self_link": "https://container.googleapis.com/v1/projects/apigee-hybrid-terraform/locations/us-central1/clusters/cluster-1",
+            "service_external_ips_config": [
+              {
+                "enabled": false
+              }
+            ],
+            "services_ipv4_cidr": "10.192.0.0/20",
+            "subnetwork": "projects/apigee-hybrid-terraform/regions/us-central1/subnetworks/us-central1",
+            "timeouts": {
+              "create": "45m",
+              "delete": "45m",
+              "read": null,
+              "update": "45m"
+            },
+            "tpu_ipv4_cidr_block": "",
+            "vertical_pod_autoscaling": [
+              {
+                "enabled": false
+              }
+            ],
+            "workload_identity_config": [
+              {
+                "workload_pool": "apigee-hybrid-terraform.svc.id.goog"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNzAwMDAwMDAwMDAwLCJkZWxldGUiOjI3MDAwMDAwMDAwMDAsInJlYWQiOjI0MDAwMDAwMDAwMDAsInVwZGF0ZSI6MjcwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_compute_subnetwork.us_central1",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.data.google_compute_zones.available",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.region",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.zone",
+            "module.gke.module.create_gke_cluster.google_service_account.cluster_service_account",
+            "module.gke.module.create_gke_cluster.random_shuffle.available_zones",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "managed",
+      "type": "google_container_node_pool",
+      "name": "pools",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "index_key": "apigee-data",
+          "schema_version": 1,
+          "attributes": {
+            "autoscaling": [
+              {
+                "location_policy": "BALANCED",
+                "max_node_count": 1,
+                "min_node_count": 1,
+                "total_max_node_count": 0,
+                "total_min_node_count": 0
+              }
+            ],
+            "cluster": "cluster-1",
+            "id": "projects/apigee-hybrid-terraform/locations/us-central1/clusters/cluster-1/nodePools/apigee-data",
+            "initial_node_count": 1,
+            "instance_group_urls": [
+              "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroupManagers/gke-cluster-1-apigee-data-a047bbcf-grp"
+            ],
+            "location": "us-central1",
+            "managed_instance_group_urls": [
+              "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroups/gke-cluster-1-apigee-data-a047bbcf-grp"
+            ],
+            "management": [
+              {
+                "auto_repair": true,
+                "auto_upgrade": true
+              }
+            ],
+            "max_pods_per_node": 110,
+            "name": "apigee-data",
+            "name_prefix": "",
+            "network_config": [
+              {
+                "create_pod_range": false,
+                "enable_private_nodes": false,
+                "pod_cidr_overprovision_config": [],
+                "pod_ipv4_cidr_block": "10.188.0.0/20",
+                "pod_range": "gke-secondary-pods"
+              }
+            ],
+            "node_config": [
+              {
+                "advanced_machine_features": [],
+                "boot_disk_kms_key": "",
+                "confidential_nodes": [],
+                "disk_size_gb": 50,
+                "disk_type": "pd-standard",
+                "effective_taints": [],
+                "ephemeral_storage_local_ssd_config": [],
+                "fast_socket": [],
+                "gcfs_config": [],
+                "guest_accelerator": [],
+                "gvnic": [],
+                "host_maintenance_policy": [],
+                "image_type": "COS_CONTAINERD",
+                "kubelet_config": [],
+                "labels": {
+                  "apigee-runtime": "true",
+                  "cluster_name": "cluster-1",
+                  "node_pool": "apigee-data"
+                },
+                "linux_node_config": [],
+                "local_nvme_ssd_block_config": [],
+                "local_ssd_count": 0,
+                "logging_variant": "DEFAULT",
+                "machine_type": "e2-standard-4",
+                "metadata": {
+                  "cluster_name": "cluster-1",
+                  "disable-legacy-endpoints": "true",
+                  "node-pool-metadata-custom-value": "apigee-data",
+                  "node_pool": "apigee-data"
+                },
+                "min_cpu_platform": "",
+                "node_group": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/logging.write",
+                  "https://www.googleapis.com/auth/monitoring"
+                ],
+                "preemptible": false,
+                "reservation_affinity": [],
+                "resource_labels": null,
+                "service_account": "tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+                "shielded_instance_config": [
+                  {
+                    "enable_integrity_monitoring": true,
+                    "enable_secure_boot": false
+                  }
+                ],
+                "sole_tenant_config": [],
+                "spot": false,
+                "tags": [
+                  "gke-cluster-1",
+                  "gke-cluster-1-apigee-data",
+                  "apigee-data"
+                ],
+                "taint": [],
+                "workload_metadata_config": [
+                  {
+                    "mode": "GKE_METADATA"
+                  }
+                ]
+              }
+            ],
+            "node_count": 1,
+            "node_locations": [
+              "us-central1-a"
+            ],
+            "operation": null,
+            "placement_policy": [],
+            "project": "apigee-hybrid-terraform",
+            "timeouts": {
+              "create": "45m",
+              "delete": "45m",
+              "update": "45m"
+            },
+            "upgrade_settings": [
+              {
+                "blue_green_settings": [],
+                "max_surge": 1,
+                "max_unavailable": 0,
+                "strategy": "SURGE"
+              }
+            ],
+            "version": "1.27.3-gke.100"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNzAwMDAwMDAwMDAwLCJkZWxldGUiOjI3MDAwMDAwMDAwMDAsInVwZGF0ZSI6MjcwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_compute_subnetwork.us_central1",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.data.google_compute_zones.available",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.region",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.zone",
+            "module.gke.module.create_gke_cluster.google_container_cluster.primary",
+            "module.gke.module.create_gke_cluster.google_service_account.cluster_service_account",
+            "module.gke.module.create_gke_cluster.random_shuffle.available_zones",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        },
+        {
+          "index_key": "apigee-runtime",
+          "schema_version": 1,
+          "attributes": {
+            "autoscaling": [
+              {
+                "location_policy": "BALANCED",
+                "max_node_count": 1,
+                "min_node_count": 1,
+                "total_max_node_count": 0,
+                "total_min_node_count": 0
+              }
+            ],
+            "cluster": "cluster-1",
+            "id": "projects/apigee-hybrid-terraform/locations/us-central1/clusters/cluster-1/nodePools/apigee-runtime",
+            "initial_node_count": 1,
+            "instance_group_urls": [
+              "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroupManagers/gke-cluster-1-apigee-runtime-d6e5e609-grp"
+            ],
+            "location": "us-central1",
+            "managed_instance_group_urls": [
+              "https://www.googleapis.com/compute/v1/projects/apigee-hybrid-terraform/zones/us-central1-a/instanceGroups/gke-cluster-1-apigee-runtime-d6e5e609-grp"
+            ],
+            "management": [
+              {
+                "auto_repair": true,
+                "auto_upgrade": true
+              }
+            ],
+            "max_pods_per_node": 110,
+            "name": "apigee-runtime",
+            "name_prefix": "",
+            "network_config": [
+              {
+                "create_pod_range": false,
+                "enable_private_nodes": false,
+                "pod_cidr_overprovision_config": [],
+                "pod_ipv4_cidr_block": "10.188.0.0/20",
+                "pod_range": "gke-secondary-pods"
+              }
+            ],
+            "node_config": [
+              {
+                "advanced_machine_features": [],
+                "boot_disk_kms_key": "",
+                "confidential_nodes": [],
+                "disk_size_gb": 50,
+                "disk_type": "pd-standard",
+                "effective_taints": [],
+                "ephemeral_storage_local_ssd_config": [],
+                "fast_socket": [],
+                "gcfs_config": [],
+                "guest_accelerator": [],
+                "gvnic": [],
+                "host_maintenance_policy": [],
+                "image_type": "COS_CONTAINERD",
+                "kubelet_config": [],
+                "labels": {
+                  "cluster_name": "cluster-1",
+                  "node_pool": "apigee-runtime"
+                },
+                "linux_node_config": [],
+                "local_nvme_ssd_block_config": [],
+                "local_ssd_count": 0,
+                "logging_variant": "DEFAULT",
+                "machine_type": "e2-standard-4",
+                "metadata": {
+                  "cluster_name": "cluster-1",
+                  "disable-legacy-endpoints": "true",
+                  "node-pool-metadata-custom-value": "apigee-runtime",
+                  "node_pool": "apigee-runtime"
+                },
+                "min_cpu_platform": "",
+                "node_group": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/logging.write",
+                  "https://www.googleapis.com/auth/monitoring"
+                ],
+                "preemptible": false,
+                "reservation_affinity": [],
+                "resource_labels": null,
+                "service_account": "tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+                "shielded_instance_config": [
+                  {
+                    "enable_integrity_monitoring": true,
+                    "enable_secure_boot": false
+                  }
+                ],
+                "sole_tenant_config": [],
+                "spot": false,
+                "tags": [
+                  "gke-cluster-1",
+                  "gke-cluster-1-apigee-runtime",
+                  "apigee-runtime"
+                ],
+                "taint": [],
+                "workload_metadata_config": [
+                  {
+                    "mode": "GKE_METADATA"
+                  }
+                ]
+              }
+            ],
+            "node_count": 1,
+            "node_locations": [
+              "us-central1-a"
+            ],
+            "operation": null,
+            "placement_policy": [],
+            "project": "apigee-hybrid-terraform",
+            "timeouts": {
+              "create": "45m",
+              "delete": "45m",
+              "update": "45m"
+            },
+            "upgrade_settings": [
+              {
+                "blue_green_settings": [],
+                "max_surge": 1,
+                "max_unavailable": 0,
+                "strategy": "SURGE"
+              }
+            ],
+            "version": "1.27.3-gke.100"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNzAwMDAwMDAwMDAwLCJkZWxldGUiOjI3MDAwMDAwMDAwMDAsInVwZGF0ZSI6MjcwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_compute_subnetwork.us_central1",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.data.google_compute_zones.available",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.region",
+            "module.gke.module.create_gke_cluster.data.google_container_engine_versions.zone",
+            "module.gke.module.create_gke_cluster.google_container_cluster.primary",
+            "module.gke.module.create_gke_cluster.google_service_account.cluster_service_account",
+            "module.gke.module.create_gke_cluster.random_shuffle.available_zones",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "managed",
+      "type": "google_project_iam_member",
+      "name": "cluster_service_account-nodeService_account",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwYMylXvPwU=",
+            "id": "apigee-hybrid-terraform/roles/container.nodeServiceAccount/serviceAccount:tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "member": "serviceAccount:tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "project": "apigee-hybrid-terraform",
+            "role": "roles/container.nodeServiceAccount"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.google_service_account.cluster_service_account",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "managed",
+      "type": "google_service_account",
+      "name": "cluster_service_account",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "tf-gke-cluster-1-q5qf",
+            "description": "",
+            "disabled": false,
+            "display_name": "Terraform-managed service account for cluster cluster-1",
+            "email": "tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "id": "projects/apigee-hybrid-terraform/serviceAccounts/tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "member": "serviceAccount:tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "name": "projects/apigee-hybrid-terraform/serviceAccounts/tf-gke-cluster-1-q5qf@apigee-hybrid-terraform.iam.gserviceaccount.com",
+            "project": "apigee-hybrid-terraform",
+            "timeouts": null,
+            "unique_id": "112719685797161217361"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress",
+            "module.gke.module.create_gke_cluster.random_string.cluster_service_account_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.gke.module.create_gke_cluster",
+      "mode": "managed",
+      "type": "random_string",
+      "name": "cluster_service_account_suffix",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "id": "q5qf",
+            "keepers": null,
+            "length": 4,
+            "lower": true,
+            "min_lower": 0,
+            "min_numeric": 0,
+            "min_special": 0,
+            "min_upper": 0,
+            "number": true,
+            "numeric": true,
+            "override_special": null,
+            "result": "q5qf",
+            "special": false,
+            "upper": false
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "google_compute_network.vpc_network",
+            "google_project_service.gcp_services",
+            "module.firewall_rules.google_compute_firewall.rules",
+            "module.firewall_rules.google_compute_firewall.rules_ingress_egress"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

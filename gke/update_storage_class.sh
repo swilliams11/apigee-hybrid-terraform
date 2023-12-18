@@ -2,20 +2,26 @@
 # This shell script is for regional gke clusters. 
 
 CLUSTER_NAME=cluster-1
-PROJECT_ID=apigee-terraform-hybrid
+PROJECT_ID=apigee-hybrid-terraform
 CLUSTER_LOCATION=us-central1
 
 # Update the storage class.
 # https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster
-echo "Fetching the cluster's credentials"
 
-gcloud compute ssh "apigee-k8s-cluster-bastion" --zone=us-central1-a
+echo "Uploading files to VM"
+gcloud compute scp ./update_storage_class.sh apigee-k8s-cluster-bastion:~ --zone=us-central1-a
+gcloud compute scp ./storageclass.yaml apigee-k8s-cluster-bastion:~ --zone=us-central1-a
+
+gcloud compute ssh apigee-k8s-cluster-bastion --zone=us-central1-a
 
 echo "installing kubectl..."
 sudo apt-get install kubectl -y
 sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y
 #gcloud components install kubectl --quiet
 
+echo "Fetching the cluster's credentials"
+gcloud auth login
+gcloud config set project apigee-hybrid-terraform
 gcloud container clusters get-credentials cluster-1 --region us-central1 --project apigee-hybrid-terraform
 #gcloud container clusters get-credentials cluster-1 --region
 
@@ -31,7 +37,7 @@ kubectl patch storageclass apigee-sc \
 
 echo "Verify the results of the patch..."
 # print the storage class
-kubectl get sc
+echo "`kubectl get sc`"
 
 echo "Enabling the workload identity..."
 # Enabled the workload identity
@@ -42,6 +48,6 @@ gcloud container clusters update ${CLUSTER_NAME} \
 
 echo "Verify the results of the workload identity..."
 # Verify the identity is good to go
-gcloud container clusters describe ${CLUSTER_NAME} \
+echo "`gcloud container clusters describe ${CLUSTER_NAME} \
 --project ${PROJECT_ID} \
---region ${CLUSTER_LOCATION} | grep -i "workload"
+--region ${CLUSTER_LOCATION} | grep -i "workload"`"

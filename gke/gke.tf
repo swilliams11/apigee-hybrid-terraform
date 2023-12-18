@@ -16,7 +16,7 @@
 resource "google_compute_instance" "vm_instance" {
   name         = "apigee-k8s-cluster-bastion"
   machine_type = "f1-micro"
-  tags = ["ssh"]
+  tags         = ["ssh"]
 
   boot_disk {
     initialize_params {
@@ -25,16 +25,16 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   network_interface {
-    network = var.network
+    network    = var.network
     subnetwork = var.subnetwork
   }
 
   shielded_instance_config {
-    enable_secure_boot =  true
+    enable_secure_boot = true
   }
 
   #metadata_startup_script = "gcloud components install kubectl"
-   metadata_startup_script = "${file("${path.module}/update_storage_class.sh")}"
+  #metadata_startup_script = "${file("${path.module}/update_storage_class.sh")}"
 
   # provisioner "remote-exec" {
   #    connection {
@@ -56,9 +56,19 @@ resource "google_compute_instance" "vm_instance" {
   #     "gcloud container clusters describe ${var.name} --project ${var.project_id} --region ${var.region} | grep -i \"workload\""
   #   ]
   # }
-  depends_on = [ 
+  depends_on = [
     module.create_gke_cluster
   ]
+}
+
+# Create Apply the storageclass.yaml file to the cluster
+resource "null_resource" "apply_storage_class_to_gke" {
+
+  provisioner "local-exec" {
+    command = "${path.module}/update_storage_class.sh"
+  }
+
+  depends_on = [google_compute_instance.vm_instance]
 }
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/private-cluster
@@ -67,11 +77,12 @@ module "create_gke_cluster" {
   project_id                 = var.project_id
   name                       = var.name
   region                     = var.region
-  zones                       = ["us-central1-a", "us-central1-b", "us-central1-f"]
+  zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
   network                    = var.network
   subnetwork                 = var.subnetwork
   ip_range_pods              = var.ip_range_pods
   ip_range_services          = var.ip_range_services
+  deletion_protection        = false
   http_load_balancing        = true
   network_policy             = false
   horizontal_pod_autoscaling = false
@@ -80,55 +91,74 @@ module "create_gke_cluster" {
   enable_private_nodes       = true
   master_authorized_networks = [
     {
-      cidr_block = "10.20.0.0/20"
+      cidr_block   = "10.20.0.0/20"
       display_name = "us-central1"
     }
-    ]
+  ]
   # IP range in CIDR notation used for the hosted master network
-  master_ipv4_cidr_block     = "10.0.0.0/28"
+  master_ipv4_cidr_block       = "10.0.0.0/28"
   master_global_access_enabled = false
   node_pools = [
     {
-      name                      = "apigee-data"
-      machine_type              = "e2-standard-4"
-      node_locations            = "us-central1-a,us-central1-b,us-central1-c"
-      min_count                 = 1
-      max_count                 = 1
-      local_ssd_count           = 0
-      spot                      = false
-      disk_size_gb              = 50
-      disk_type                 = "pd-standard"
-      image_type                = "COS_CONTAINERD"
-      enable_gcfs               = false
-      enable_gvnic              = false
-      logging_variant           = "DEFAULT"
-      auto_repair               = true
-      auto_upgrade              = true
+      name            = "apigee-data"
+      machine_type    = "e2-standard-4"
+      node_locations  = var.node_locations
+      min_count       = 1
+      max_count       = 1
+      local_ssd_count = 0
+      spot            = false
+      disk_size_gb    = 50
+      disk_type       = "pd-standard"
+      image_type      = "COS_CONTAINERD"
+      enable_gcfs     = false
+      enable_gvnic    = false
+      logging_variant = "DEFAULT"
+      auto_repair     = true
+      auto_upgrade    = true
       #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
-      preemptible               = false
-      initial_node_count        = 1
-      remove_default_node_pool = true
+      preemptible        = false
+      initial_node_count = 1
     },
     {
-      name                      = "apigee-runtime"
-      machine_type              = "e2-standard-4"
-      node_locations            = "us-central1-a,us-central1-b,us-central1-c"
-      min_count                 = 1
-      max_count                 = 1
-      local_ssd_count           = 0
-      spot                      = false
-      disk_size_gb              = 50
-      disk_type                 = "pd-standard"
-      image_type                = "COS_CONTAINERD"
-      enable_gcfs               = false
-      enable_gvnic              = false
-      logging_variant           = "DEFAULT"
-      auto_repair               = true
-      auto_upgrade              = true
+      name            = "apigee-runtime"
+      machine_type    = "e2-standard-4"
+      node_locations  = var.node_locations
+      min_count       = 1
+      max_count       = 1
+      local_ssd_count = 0
+      spot            = false
+      disk_size_gb    = 50
+      disk_type       = "pd-standard"
+      image_type      = "COS_CONTAINERD"
+      enable_gcfs     = false
+      enable_gvnic    = false
+      logging_variant = "DEFAULT"
+      auto_repair     = true
+      auto_upgrade    = true
       #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
-      preemptible               = false
-      initial_node_count        = 1
-      remove_default_node_pool = true
+      preemptible        = false
+      initial_node_count = 1
+    },
+    {
+      name            = "default-pool"
+      machine_type    = "e2-standard-4"
+      node_locations  = var.node_locations
+      min_count       = 1
+      max_count       = 1
+      local_ssd_count = 0
+      spot            = false
+      disk_size_gb    = 50
+      disk_type       = "pd-standard"
+      image_type      = "COS_CONTAINERD"
+      enable_gcfs     = false
+      enable_gvnic    = false
+      logging_variant = "DEFAULT"
+      auto_repair     = true
+      auto_upgrade    = true
+      #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
+      preemptible              = false
+      initial_node_count       = 1
+      remove_default_node_pool = false
     }
   ]
 
@@ -147,8 +177,10 @@ module "create_gke_cluster" {
     },
     apigee-data = {
       apigee-runtime = true
+    },
+    default-node-pool = {
+      default-node-pool = true
     }
-
   }
 
   node_pools_metadata = {
@@ -159,6 +191,9 @@ module "create_gke_cluster" {
     },
     apigee-runtime = {
       node-pool-metadata-custom-value = "apigee-runtime"
+    },
+    default-node-pool = {
+      node-pool-metadata-custom-value = "default-node-pool"
     }
 
   }
@@ -185,6 +220,10 @@ module "create_gke_cluster" {
 
     apigee-runtime = [
       "apigee-runtime",
+    ]
+
+    default-node-pool = [
+      "default-node-pool",
     ]
   }
 }
@@ -222,7 +261,7 @@ module "create_gke_cluster" {
 #   provisioner "local-exec" {
 #     command = "${path.module}/update_storage_class.sh" 
 #   }
-   
+
 #   depends_on = [google_compute_instance.vm_instance]
 # }
 
