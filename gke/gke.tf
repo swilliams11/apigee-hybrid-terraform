@@ -33,6 +33,7 @@ resource "google_compute_instance" "vm_instance" {
     enable_secure_boot = true
   }
 
+
   #metadata_startup_script = "gcloud components install kubectl"
   #metadata_startup_script = "${file("${path.module}/update_storage_class.sh")}"
 
@@ -61,14 +62,31 @@ resource "google_compute_instance" "vm_instance" {
   ]
 }
 
+# Wait for the VM to startup and all processes to complete
+resource "time_sleep" "wait_for_vm" {
+  depends_on = [google_compute_instance.vm_instance]
+
+  create_duration = "60s"
+}
+
+# Upload the files to the VM.
+resource "null_resource" "upload_files_to_vm" {
+
+  provisioner "local-exec" {
+    command = "${path.module}/upload_files_to_compute.sh ${path.cwd} ${path.module}"
+  }
+
+  depends_on = [time_sleep.wait_for_vm]
+}
+
 # Create Apply the storageclass.yaml file to the cluster
 resource "null_resource" "apply_storage_class_to_gke" {
 
   provisioner "local-exec" {
-    command = "${path.module}/update_storage_class.sh"
+    command = "${path.module}/ssh_and_execute_update.sh"
   }
 
-  depends_on = [google_compute_instance.vm_instance]
+  depends_on = [null_resource.upload_files_to_vm]
 }
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/private-cluster
@@ -138,27 +156,6 @@ module "create_gke_cluster" {
       #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
       preemptible        = false
       initial_node_count = 1
-    },
-    {
-      name            = "default-pool"
-      machine_type    = "e2-standard-4"
-      node_locations  = var.node_locations
-      min_count       = 1
-      max_count       = 1
-      local_ssd_count = 0
-      spot            = false
-      disk_size_gb    = 50
-      disk_type       = "pd-standard"
-      image_type      = "COS_CONTAINERD"
-      enable_gcfs     = false
-      enable_gvnic    = false
-      logging_variant = "DEFAULT"
-      auto_repair     = true
-      auto_upgrade    = true
-      #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
-      preemptible              = false
-      initial_node_count       = 1
-      remove_default_node_pool = false
     }
   ]
 

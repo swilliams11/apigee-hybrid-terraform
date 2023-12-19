@@ -8,12 +8,6 @@ CLUSTER_LOCATION=us-central1
 # Update the storage class.
 # https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster
 
-echo "Uploading files to VM"
-gcloud compute scp ./update_storage_class.sh apigee-k8s-cluster-bastion:~ --zone=us-central1-a
-gcloud compute scp ./storageclass.yaml apigee-k8s-cluster-bastion:~ --zone=us-central1-a
-
-gcloud compute ssh apigee-k8s-cluster-bastion --zone=us-central1-a
-
 echo "installing kubectl..."
 sudo apt-get install kubectl -y
 sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y
