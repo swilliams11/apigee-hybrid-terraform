@@ -1,9 +1,11 @@
 # /bin/sh
 # This shell script is for regional gke clusters. 
 
-CLUSTER_NAME=cluster-1
-PROJECT_ID=apigee-hybrid-terraform
-CLUSTER_LOCATION=us-central1
+CLUSTER_NAME=$1
+PROJECT_ID=$2
+CLUSTER_LOCATION=$3
+SA=$4
+KEY_FILE=$5
 
 # Update the storage class.
 # https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster
@@ -14,10 +16,12 @@ sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y
 #gcloud components install kubectl --quiet
 
 echo "Fetching the cluster's credentials"
-gcloud auth login
+gcloud config set account $SA
+gcloud auth activate-service-account $SA --key-file ./$KEY_FILE
+#gcloud auth login
+
 gcloud config set project apigee-hybrid-terraform
-gcloud container clusters get-credentials cluster-1 --region us-central1 --project apigee-hybrid-terraform
-#gcloud container clusters get-credentials cluster-1 --region
+gcloud container clusters get-credentials $CLUSTER_NAME --region us-central1 --project $PROJECT_ID
 
 echo "Applying the storage class update..."
 kubectl apply -f ./storageclass.yaml

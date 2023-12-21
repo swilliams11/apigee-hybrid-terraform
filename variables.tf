@@ -101,3 +101,14 @@ variable "ssh_user" {
   default     = "user"
 
 }
+
+variable "service_account_key_file" {
+    type = string
+    description = "The Google Cloud Service Account key (.json) file which is used to execute the kubectl commands on the server"
+}
+
+variable "service_account_email" {
+    type = string
+    description = "The Google Cloud Service Account email that is used to execute the kubectl commands on the bastion VM."
+}
+

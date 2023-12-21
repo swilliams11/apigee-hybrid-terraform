@@ -1,0 +1,52 @@
+instanceID: "UNIQUE_INSTANCE_IDENTIFIER"
+namespace: APIGEE_NAMESPACE # Usually "apigee"
+
+gcp:
+  projectID: PROJECT_ID
+  region: ANALYTICS_REGION
+  workloadIdentity:
+    enabled: true
+    gsa: "NON_PROD_SERVICE_ACCOUNT_EMAIL"
+    # For example: "apigee-non-prod@PROJECT_ID.iam.gserviceaccount.com"
+
+k8sCluster:
+  name: CLUSTER_NAME
+  region: CLUSTER_LOCATION # Must be the closest Google Cloud region to your cluster.
+org: ORG_NAME
+
+instanceID: "UNIQUE_INSTANCE_IDENTIFIER"
+
+cassandra:
+  hostNetwork: false
+    # false for all GKE installations.
+    # See Multi-region deployment: Prerequisites
+  replicaCount: 1
+    # Use 1 for non-prod or "demo" installations and multiples of 3 for production.
+    # See Configure Cassandra for production for guidelines.
+  backup:
+    enabled: true
+    # Set to true for initial installation.
+    # This triggers the chart to create the apigee-cassandra-backup Kubernetes service account when you install it.
+    # See Cassandra backup overview for instructions on using cassandra.backup.
+
+virtualhosts:
+- name: ENVIRONMENT_GROUP_NAME
+  selector:
+    app: apigee-ingressgateway
+    ingress_name: INGRESS_NAME
+  sslCertPath: PATH_TO_CERT_FILE
+  sslKeyPath: PATH_TO_KEY_FILE
+
+ingressGateways:
+- name: INGRESS_NAME # maximum 17 characters.
+  replicaCountMin: 2
+  replicaCountMax: 10
+  svcAnnotations:  # optional. If you are on AKS, see Known issue #260772383
+    SVC_ANNOTATIONS_KEY: SVC_ANNOTATIONS_VALUE
+  svcLoadBalancerIP: SVC_LOAD_BALANCER_IP  # optional
+
+envs:
+- name: ENVIRONMENT_NAME
+
+logger:
+  enabled: false # Set to false for all GKE installations.

@@ -12,6 +12,31 @@
 #   subnetwork = "us-central1"
 # }
 
+# Create a NAT gateway and router so we can install Helm and the Google Apigee Helm Charts
+module "cloud_router" {
+  source  = "terraform-google-modules/cloud-router/google"
+  version = "~> 6.0"
+  name    = "my-cloud-router"
+  project = var.project_id
+  network = var.network
+  region  = var.region
+
+  nats = [{
+    name                               = "my-nat-gateway"
+    source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+    subnetworks = [
+      {
+        name                     = var.subnet_id
+        #name                     = module.vpc.subnets["us-central1/us-central1-a"].id
+        source_ip_ranges_to_nat  = ["ALL_SUBNETWORKS_ALL_IP_RANGES"]
+        #secondary_ip_range_names = module.vpc.subnets["us-central1/us-central1-a"].secondary_ip_range[*].range_name
+        #secondary_ip_range_names = var.subnet_range_name
+      }
+    ]
+  }]
+}
+
+
 # Create a VM that can be used to access the K8S cluster.
 resource "google_compute_instance" "vm_instance" {
   name         = "apigee-k8s-cluster-bastion"
@@ -58,7 +83,8 @@ resource "google_compute_instance" "vm_instance" {
   #   ]
   # }
   depends_on = [
-    module.create_gke_cluster
+    module.create_gke_cluster,
+    module.cloud_router
   ]
 }
 
@@ -73,7 +99,7 @@ resource "time_sleep" "wait_for_vm" {
 resource "null_resource" "upload_files_to_vm" {
 
   provisioner "local-exec" {
-    command = "${path.module}/upload_files_to_compute.sh ${path.cwd} ${path.module}"
+    command = "${path.module}/upload_files_to_compute.sh ${path.cwd} ${path.module} ${var.service_account_key_file}"
   }
 
   depends_on = [time_sleep.wait_for_vm]
@@ -83,11 +109,12 @@ resource "null_resource" "upload_files_to_vm" {
 resource "null_resource" "apply_storage_class_to_gke" {
 
   provisioner "local-exec" {
-    command = "${path.module}/ssh_and_execute_update.sh"
+    command = "${path.module}/ssh_and_execute_update.sh ${var.name} ${var.project_id} ${var.region} ${var.service_account_email} ${var.service_account_key_file}"
   }
 
   depends_on = [null_resource.upload_files_to_vm]
 }
+
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/private-cluster
 module "create_gke_cluster" {
@@ -156,6 +183,26 @@ module "create_gke_cluster" {
       #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
       preemptible        = false
       initial_node_count = 1
+    },
+    {
+      name                      = "default-node-pool"
+      machine_type              = "e2-medium"
+      node_locations            = var.node_locations
+      min_count                 = 1
+      max_count                 = 1
+      local_ssd_count           = 0
+      spot                      = false
+      disk_size_gb              = 50
+      disk_type                 = "pd-standard"
+      image_type                = "COS_CONTAINERD"
+      enable_gcfs               = false
+      enable_gvnic              = false
+      logging_variant           = "DEFAULT"
+      auto_repair               = true
+      auto_upgrade              = true
+      #service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
+      preemptible               = false
+      initial_node_count        = 1
     }
   ]
 
@@ -199,13 +246,13 @@ module "create_gke_cluster" {
   node_pools_taints = {
     all = []
 
-    # default-node-pool = [
-    #   {
-    #     key    = "default-node-pool"
-    #     value  = false
-    #     effect = "PREFER_NO_SCHEDULE"
-    #   },
-    # ]
+    default-node-pool = [
+      {
+        key    = "default-node-pool"
+        value  = false
+        effect = "PREFER_NO_SCHEDULE"
+      },
+    ]
   }
 
   node_pools_tags = {

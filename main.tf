@@ -142,7 +142,11 @@ module "gke" {
   network = google_compute_network.vpc_network.name
   subnetwork = google_compute_subnetwork.us_central1.name
   ssh_user = var.ssh_user
-
+  service_account_key_file = var.service_account_key_file
+  service_account_email = var.service_account_email
+  subnet_id = google_compute_subnetwork.us_central1.id
+  subnet_range_name = google_compute_subnetwork.us_central1.secondary_ip_range[*].range_name
+  
   depends_on = [ 
     google_project_service.gcp_services,
     google_compute_network.vpc_network,

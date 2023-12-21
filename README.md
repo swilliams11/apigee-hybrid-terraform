@@ -40,5 +40,10 @@ While the script is executing, the command line will prompt you to login to GCP 
 ### Apply and override variables
 ```shell
 terraform apply -var="ssh_user=user_id"
+
+# The service account key file must be located in your home directory (linux based home dir)
+terraform apply -var="ssh_user=user_id" -var="service_account_email=sa@g.com" -var="service_account_key_file=sa_key_file.json"
 ```
 
+## NOTICE
+This is not an officially support Google Cloud product.
