@@ -99,7 +99,7 @@ resource "time_sleep" "wait_for_vm" {
 resource "null_resource" "upload_files_to_vm" {
 
   provisioner "local-exec" {
-    command = "${path.module}/upload_files_to_compute.sh ${path.cwd} ${path.module} ${var.service_account_key_file}"
+    command = "${path.module}/upload_files_to_compute.sh ${path.cwd} ${path.module} ${var.service_account_key_file} ${var.ssh_user}"
   }
 
   depends_on = [time_sleep.wait_for_vm]
@@ -109,7 +109,7 @@ resource "null_resource" "upload_files_to_vm" {
 resource "null_resource" "apply_storage_class_to_gke" {
 
   provisioner "local-exec" {
-    command = "${path.module}/ssh_and_execute_update.sh ${var.name} ${var.project_id} ${var.region} ${var.service_account_email} ${var.service_account_key_file}"
+    command = "${path.module}/ssh_and_execute_update.sh ${var.name} ${var.project_id} ${var.region} ${var.service_account_email} ${var.service_account_key_file} ${var.apigee_helm_charts_home}"
   }
 
   depends_on = [null_resource.upload_files_to_vm]

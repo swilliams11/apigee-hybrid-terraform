@@ -1,6 +1,7 @@
 # /bin/sh
 ENV_GROUP=apigee-hybrid-group
 DOMAIN=test.domain.com
+APIGEE_HELM_CHARTS_HOME=$1
 
 mkdir $APIGEE_HELM_CHARTS_HOME/certs
 mkdir $APIGEE_HELM_CHARTS_HOME/apigee-virtualhost/certs

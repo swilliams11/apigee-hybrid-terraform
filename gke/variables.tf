@@ -67,3 +67,9 @@ variable "subnet_id" {
 variable "subnet_range_name" {
     type = list(string)
 }
+
+variable "apigee_helm_charts_home" {
+    type = string
+    default = "apigee-hybrid/helm-charts"
+    description = "Apigee Helm Charts home location on the bastion VM host."
+}

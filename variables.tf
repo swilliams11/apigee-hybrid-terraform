@@ -14,7 +14,7 @@ variable "gcp_service_list_gke" {
 
 variable "project_id" {
   type    = string
-  default = "apigee-hybrid-terraform"
+  default = "apigee-hybrid-terraform-test"
 }
 
 variable "apigee_org_name" {
@@ -24,7 +24,7 @@ variable "apigee_org_name" {
 
 variable "apigee_org_name_full_path" {
   type    = string
-  default = "organizations/apigee-hybrid-terraform"
+  default = "organizations/apigee-hybrid-terraform-test"
 }
 
 variable "apigee_env_name" {

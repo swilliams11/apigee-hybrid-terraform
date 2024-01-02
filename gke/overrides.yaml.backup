@@ -39,7 +39,9 @@ ingressGateways:
 - name: INGRESS_NAME # maximum 17 characters.
   replicaCountMin: 2
   replicaCountMax: 10
-  svcType: ClusterIP
+  svcAnnotations:  # optional. If you are on AKS, see Known issue #260772383
+    SVC_ANNOTATIONS_KEY: SVC_ANNOTATIONS_VALUE
+  svcLoadBalancerIP: SVC_LOAD_BALANCER_IP  # optional
 
 envs:
 - name: ENVIRONMENT_NAME
