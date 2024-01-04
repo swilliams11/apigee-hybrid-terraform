@@ -8,3 +8,4 @@ __pycache__
 .pytest_cache
 helpfulresponse.md
 terraform.tfstate.1702914810.backup
+py311/

@@ -105,11 +105,12 @@ resource "null_resource" "upload_files_to_vm" {
   depends_on = [time_sleep.wait_for_vm]
 }
 
-# Create Apply the storageclass.yaml file to the cluster
+# Executes all the Helm runtime setup steps (1 through 12)
+# https://cloud.google.com/apigee/docs/hybrid/v1.11/helm-install-create-cluster
 resource "null_resource" "apply_storage_class_to_gke" {
 
   provisioner "local-exec" {
-    command = "${path.module}/ssh_and_execute_update.sh ${var.name} ${var.project_id} ${var.region} ${var.service_account_email} ${var.service_account_key_file} ${var.apigee_helm_charts_home}"
+    command = "${path.module}/ssh_and_execute_update.sh ${var.name} ${var.project_id} ${var.region} ${var.service_account_email} ${var.service_account_key_file} ${var.apigee_helm_charts_home} ${var.apigee_env_group_name} ${var.apigee_env_name} ${var.ssh_user}"
   }
 
   depends_on = [null_resource.upload_files_to_vm]
@@ -149,7 +150,7 @@ module "create_gke_cluster" {
       machine_type    = "e2-standard-4"
       node_locations  = var.node_locations
       min_count       = 1
-      max_count       = 1
+      max_count       = 3
       local_ssd_count = 0
       spot            = false
       disk_size_gb    = 50
@@ -169,7 +170,7 @@ module "create_gke_cluster" {
       machine_type    = "e2-standard-4"
       node_locations  = var.node_locations
       min_count       = 1
-      max_count       = 1
+      max_count       = 3
       local_ssd_count = 0
       spot            = false
       disk_size_gb    = 50
@@ -189,7 +190,7 @@ module "create_gke_cluster" {
       machine_type              = "e2-medium"
       node_locations            = var.node_locations
       min_count                 = 1
-      max_count                 = 1
+      max_count                 = 2
       local_ssd_count           = 0
       spot                      = false
       disk_size_gb              = 50

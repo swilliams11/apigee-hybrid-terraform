@@ -8,7 +8,12 @@ HOME=`pwd`
 APIGEE_HELM_CHARTS_HOME="$HOME/$1"
 echo "APIGEE_HELM_CHARTS_HOME: $APIGEE_HELM_CHARTS_HOME"
 
-chmod 744 $APIGEE_HELM_CHARTS_HOME/apigee-operator/etc/tools/
+# change the permission on the create-service-account shell script
+cp ./create-service-account -f $APIGEE_HELM_CHARTS_HOME/apigee-operator/etc/tools/create-service-account
+chmod 744 $APIGEE_HELM_CHARTS_HOME/apigee-operator/etc/tools/create-service-account
+ls -la $APIGEE_HELM_CHARTS_HOME/apigee-operator/etc/tools/create-service-account
+
+# create the service accounts
 $APIGEE_HELM_CHARTS_HOME/apigee-operator/etc/tools/create-service-account \
   --env non-prod \
   --dir $APIGEE_HELM_CHARTS_HOME/apigee-datastore

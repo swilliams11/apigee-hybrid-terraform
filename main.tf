@@ -146,7 +146,8 @@ module "gke" {
   service_account_email = var.service_account_email
   subnet_id = google_compute_subnetwork.us_central1.id
   subnet_range_name = google_compute_subnetwork.us_central1.secondary_ip_range[*].range_name
-  
+  apigee_env_group_name = var.apigee_env_group_name
+  apigee_env_name = var.apigee_env_name
   depends_on = [ 
     google_project_service.gcp_services,
     google_compute_network.vpc_network,

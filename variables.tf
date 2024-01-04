@@ -96,7 +96,7 @@ variable "allow_listed_ips" {
 variable "ssh_user" {
   type        = string
   description = "The user name used to ssh into the bastion VM instance"
-  sensitive   = true
+  sensitive   = false
   nullable    = false
   default     = "user"
 

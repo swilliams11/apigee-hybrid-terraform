@@ -20,7 +20,7 @@ gcloud config set account $SA
 gcloud auth activate-service-account $SA --key-file ./$KEY_FILE
 #gcloud auth login
 
-gcloud config set project apigee-hybrid-terraform
+gcloud config set project $PROJECT_ID
 gcloud container clusters get-credentials $CLUSTER_NAME --region us-central1 --project $PROJECT_ID
 
 echo "Applying the storage class update..."

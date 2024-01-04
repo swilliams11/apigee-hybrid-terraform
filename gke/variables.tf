@@ -40,7 +40,7 @@ variable "subnetwork" {
 variable "ssh_user" {
   type = string
   description = "The user name used to ssh into the bastion VM instance"
-  sensitive = true
+  sensitive = false
   nullable = false
 }
 
@@ -73,3 +73,18 @@ variable "apigee_helm_charts_home" {
     default = "apigee-hybrid/helm-charts"
     description = "Apigee Helm Charts home location on the bastion VM host."
 }
+
+variable "apigee_env_name" {
+  type    = string
+  default = "hybrid-env"
+}
+
+variable "apigee_env_group_name" {
+  type    = string
+  default = "hybrid-group"
+}
+
+# variable "k8s_compute_instances_service_account" {
+#   type    = string
+#   description = "This is the service account that will be used as the default SA on the K8S compute instances (GKE Nodes)."
+# }
