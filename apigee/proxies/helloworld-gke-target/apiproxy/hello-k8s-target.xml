@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="4" name="hello-k8s-target">
+  <DisplayName/>
+  <Description/>
+  <CreatedAt>1706195817968</CreatedAt>
+  <LastModifiedAt>1706195817968</LastModifiedAt>
+  <BasePaths>/hello-gke</BasePaths>
+  <Policies>
+    <Policy>VA-APIKey</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>
