@@ -19,7 +19,7 @@ variable "project_id" {
 
 variable "apigee_org_name" {
   type    = string
-  default = "apigee-hybrid-terraform"
+  default = "apigee-hybrid-terraform-test"
 }
 
 variable "apigee_org_name_full_path" {
